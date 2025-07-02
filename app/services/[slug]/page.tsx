@@ -51,11 +51,11 @@ export default async function ServicePage({ params }: ServicePageProps) {
   return (
     <div className="min-h-screen bg-white">
       {/* Simplified Header */}
-      <div className="bg-gradient-to-r pt-10 from-blue-600 to-purple-600 text-white">
+      <div className="bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 pt-10 text-white">
         <div className="container mx-auto px-6 py-16">
-          <Link href="/" className="inline-flex items-center text-blue-100 hover:text-white mb-8 transition-colors">
+          <Link href="/services" className="inline-flex items-center text-blue-100 hover:text-white mb-8 transition-colors">
             <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Home
+            Back to Services
           </Link>
           <div className="flex flex-col sm:flex-row items-left sm:items-start gap-4 mb-6 text-left sm:text-left">
             <div className="flex h-16 w-16 items-center justify-center rounded-xl bg-white/20 backdrop-blur mb-2 sm:mb-0">

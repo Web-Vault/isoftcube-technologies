@@ -165,7 +165,7 @@ export default function CareersPage() {
               </Badge>
               <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight text-white leading-none">
                 <span className="block">Build The</span>
-                <span className="block bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
                   Future Together
                 </span>
               </h1>

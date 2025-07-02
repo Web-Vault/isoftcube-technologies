@@ -24,6 +24,10 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [services, setServices] = useState<any[]>([]);
+  const [siteConfig, setSiteConfig] = useState<any>(null);
+
+  const fallbackLogo = "/favicon-96x96-1.png";
+  const fallbackName = "iSoftcube Technologies";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,6 +43,12 @@ export default function Navbar() {
       .then(data => setServices(data));
   }, []);
 
+  useEffect(() => {
+    fetch('/api/siteconfig')
+      .then(res => res.json())
+      .then(data => setSiteConfig(data));
+  }, []);
+
   return (
     <header
       className={`fixed top-0 z-50 w-full transition-all duration-300 ${
@@ -50,25 +60,21 @@ export default function Navbar() {
         <Link href="/" className="flex items-center space-x-3 group">
           <div className="relative">
             <img
-              src="/favicon-96x96-1.png"
-              alt="iSoftcube Logo"
+              src={siteConfig?.logoUrl || fallbackLogo}
+              alt={siteConfig?.siteName || fallbackName}
               className="h-10 w-10 rounded-xl group-hover:shadow-xl transition-all duration-300 transform group-hover:scale-110"
             />
           </div>
           <div className="flex flex-col">
             <span
-              className={`text-2xl font-bold transition-colors duration-300 ${
-                isScrolled ? "text-gray-900" : "text-white"
-              }`}
+              className={`text-2xl font-bold transition-colors duration-300 ${isScrolled ? "text-gray-900" : "text-white"}`}
             >
-              iSoftcube
+              {(siteConfig?.siteName || fallbackName).split(" ")[0]}
             </span>
             <span
-              className={`text-xs font-medium transition-colors duration-300 ${
-                isScrolled ? "text-gray-500" : "text-gray-300"
-              }`}
+              className={`text-xs font-medium transition-colors duration-300 ${isScrolled ? "text-gray-500" : "text-gray-300"}`}
             >
-              Technologies
+              {(siteConfig?.siteName || fallbackName).split(" ").slice(1).join(" ")}
             </span>
           </div>
         </Link>

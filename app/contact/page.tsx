@@ -3,7 +3,7 @@
 import type React from "react"
 
 import { useState } from "react"
-import { Mail, Phone, MapPin, Clock } from "lucide-react"
+import { Mail, Phone, MapPin, Clock, Badge } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -48,13 +48,17 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-purple-50">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white py-[100px]">
+      <section className="bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 text-white py-30 md:py-36">
         <div className="container mx-auto px-6">
           <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">Get In Touch</h1>
-            <p className="text-xl text-blue-100 leading-relaxed">
-              Ready to start your next project? We'd love to hear from you. Let's discuss how we can help transform your
-              business.
+            <h1 className="text-5xl md:text-6xl font-black mb-10 leading-tight">
+              Get In Touch With <br />
+              <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
+                iSoftcube Technologies
+              </span>
+            </h1>
+            <p className="text-2xl md:text-3xl text-blue-100 leading-relaxed max-w-2xl mx-auto">
+              Ready to start your next project? We'd love to hear from you. Let's discuss how we can help transform your business.
             </p>
           </div>
         </div>
@@ -181,8 +185,8 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h4 className="font-semibold text-gray-900">Phone</h4>
-                    <p className="text-gray-600">+1 (555) 123-4567</p>
-                    <p className="text-gray-600">+1 (555) 987-6543</p>
+                    <p className="text-gray-600">+91 99988 33373</p>
+                    {/* <p className="text-gray-600">+91 87584 99499</p> */}
                   </div>
                 </div>
 
@@ -204,11 +208,11 @@ export default function ContactPage() {
                   <div>
                     <h4 className="font-semibold text-gray-900">Address</h4>
                     <p className="text-gray-600">
-                      123 Tech Street
+                      717 Shivalik Satyamev
                       <br />
-                      Silicon Valley, CA 94000
+                      Nr. Valik Saheb OverBridge, S.P. Ring Road
                       <br />
-                      United States
+                      Bopal, Ahmedabad - 380058
                     </p>
                   </div>
                 </div>
@@ -222,7 +226,7 @@ export default function ContactPage() {
                     <p className="text-gray-600">
                       Monday - Friday: 9:00 AM - 6:00 PM
                       <br />
-                      Saturday: 10:00 AM - 4:00 PM
+                      Saturday: Closed
                       <br />
                       Sunday: Closed
                     </p>
