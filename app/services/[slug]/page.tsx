@@ -57,13 +57,13 @@ export default async function ServicePage({ params }: ServicePageProps) {
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Home
           </Link>
-          <div className="flex items-center gap-4 mb-6">
-            <div className="flex h-16 w-16 items-center justify-center rounded-xl bg-white/20 backdrop-blur">
+          <div className="flex flex-col sm:flex-row items-left sm:items-start gap-4 mb-6 text-left sm:text-left">
+            <div className="flex h-16 w-16 items-center justify-center rounded-xl bg-white/20 backdrop-blur mb-2 sm:mb-0">
               <IconComponent className="h-8 w-8" />
             </div>
             <div>
-              <h1 className="text-4xl font-bold">{service.title}</h1>
-              <p className="text-xl text-blue-100 mt-2">{service.shortDescription}</p>
+              <h1 className="text-3xl sm:text-4xl font-bold">{service.title}</h1>
+              <p className="text-lg sm:text-xl text-blue-100 mt-2">{service.shortDescription}</p>
             </div>
           </div>
         </div>

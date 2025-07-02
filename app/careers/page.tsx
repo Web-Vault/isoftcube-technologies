@@ -301,13 +301,15 @@ export default function CareersPage() {
                   <div className="relative p-8">
                     {/* Main Job Info */}
                     <CardHeader className="p-0 mb-6">
-                      <div className="flex items-center gap-4">
-                        <div className="relative p-4 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-500 shadow-lg">
-                          <IconComponent className="h-8 w-8 text-white" />
-                        </div>
+                      <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 text-left">
                         <div>
-                          <CardTitle className="text-2xl font-bold text-gray-900 mb-2">{job.title}</CardTitle>
-                          <div className="flex items-center gap-3 text-sm text-gray-600">
+                          <div className="relative p-4 w-max rounded-2xl bg-gradient-to-br from-blue-500 to-purple-500 shadow-lg">
+                            <IconComponent className="h-8 w-8 text-white" />
+                          </div>
+                        </div>
+                        <div className="flex-1">
+                          <CardTitle className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">{job.title}</CardTitle>
+                          <div className="flex flex-wrap justify-start items-center gap-2 text-sm text-gray-600">
                             <Badge variant="secondary" className="bg-blue-100 text-blue-800 border-0 font-medium">
                               {job.department}
                             </Badge>
@@ -321,7 +323,7 @@ export default function CareersPage() {
                             </span>
                           </div>
                         </div>
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center sm:justify-end gap-2">
                           <Badge variant="outline" className="border-purple-200 text-purple-700 font-medium">
                             {job.type}
                           </Badge>
