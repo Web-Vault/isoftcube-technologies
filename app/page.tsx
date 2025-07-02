@@ -1,59 +1,24 @@
+"use client"
+
+import { useEffect, useState } from "react";
 import { ArrowRight, Code, Smartphone, Wifi, Cloud, Shield, Zap, Play, Star, Users, Award } from "lucide-react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 
-const services = [
-  {
-    icon: Code,
-    title: "Web Development",
-    description: "Custom websites and web applications built with modern technologies",
-    features: ["Responsive Design", "SEO Optimized", "Fast Loading", "Secure"],
-    color: "from-blue-500 to-cyan-500",
-    delay: "0ms",
-  },
-  {
-    icon: Smartphone,
-    title: "App Development",
-    description: "Native and cross-platform mobile applications for iOS and Android",
-    features: ["Native Performance", "Cross-Platform", "User-Friendly", "Scalable"],
-    color: "from-purple-500 to-pink-500",
-    delay: "100ms",
-  },
-  {
-    icon: Wifi,
-    title: "IoT Solutions",
-    description: "Smart connected devices and IoT ecosystem development",
-    features: ["Real-time Monitoring", "Cloud Integration", "Data Analytics", "Remote Control"],
-    color: "from-green-500 to-teal-500",
-    delay: "200ms",
-  },
-  {
-    icon: Cloud,
-    title: "Cloud Services",
-    description: "Cloud infrastructure setup, migration, and management services",
-    features: ["AWS/Azure/GCP", "Auto Scaling", "Cost Optimization", "24/7 Support"],
-    color: "from-orange-500 to-red-500",
-    delay: "300ms",
-  },
-  {
-    icon: Shield,
-    title: "Cybersecurity",
-    description: "Comprehensive security solutions to protect your digital assets",
-    features: ["Threat Detection", "Data Protection", "Compliance", "Security Audits"],
-    color: "from-indigo-500 to-purple-500",
-    delay: "400ms",
-  },
-  {
-    icon: Zap,
-    title: "Digital Transformation",
-    description: "End-to-end digital transformation consulting and implementation",
-    features: ["Process Automation", "Legacy Modernization", "AI Integration", "Change Management"],
-    color: "from-yellow-500 to-orange-500",
-    delay: "500ms",
-  },
-]
+const iconMap = {
+  Code,
+  Smartphone,
+  Wifi,
+  Cloud,
+  Shield,
+  Zap,
+  Play,
+  Star,
+  Users,
+  Award,
+};
 
 // const stats = [
 //   { number: "500+", label: "Projects Delivered", icon: Award },
@@ -63,6 +28,14 @@ const services = [
 // ]
 
 export default function HomePage() {
+  const [services, setServices] = useState<any[]>([]);
+
+  useEffect(() => {
+    fetch("/api/services")
+      .then(res => res.json())
+      .then(data => setServices(data));
+  }, []);
+
   return (
     <div className="flex flex-col min-h-screen overflow-hidden">
       {/* Hero Section with Professional Touch */}
@@ -171,67 +144,74 @@ export default function HomePage() {
 
           {/* Professional Service Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service, index) => (
-              <Card
-                key={index}
-                className="group relative h-full overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-105 bg-white"
-                style={{ animationDelay: service.delay }}
-              >
-                {/* Subtle Gradient Background */}
-                <div
-                  className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}
-                ></div>
-
-                <CardHeader className="relative pb-4">
-                  <div className="flex items-center justify-between mb-4">
-                    <div
-                      className={`relative p-4 rounded-2xl bg-gradient-to-br ${service.color} shadow-lg transform group-hover:scale-110 transition-all duration-500`}
-                    >
-                      <service.icon className="h-8 w-8 text-white" />
-                    </div>
-                    <div className="text-right">
-                      <div className="text-sm text-gray-400 font-mono">0{index + 1}</div>
-                    </div>
-                  </div>
-                  <CardTitle className="text-2xl font-bold text-gray-900 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-purple-600 group-hover:bg-clip-text transition-all duration-300">
-                    {service.title}
-                  </CardTitle>
-                </CardHeader>
-
-                <CardContent className="relative">
-                  <CardDescription className="text-gray-600 mb-6 leading-relaxed text-base">
-                    {service.description}
-                  </CardDescription>
-
-                  {/* Feature Tags */}
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {service.features.map((feature, featureIndex) => (
-                      <Badge
-                        key={featureIndex}
-                        variant="secondary"
-                        className="text-xs px-3 py-1 bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors"
+            {services.slice(0, 6).map((service, index) => {
+              const IconComponent = iconMap[service.icon as keyof typeof iconMap] || Code;
+              return (
+                <Card
+                  key={service.slug || index}
+                  className="group relative h-full overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-105 bg-white"
+                >
+                  {/* Subtle Gradient Background */}
+                  <div
+                    className={`absolute inset-0 bg-gradient-to-br from-blue-500 to-cyan-500 opacity-0 group-hover:opacity-5 transition-opacity duration-500`}
+                  ></div>
+                  <CardHeader className="relative pb-4">
+                    <div className="flex items-center justify-between mb-4">
+                      <div
+                        className={`relative p-4 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500 shadow-lg transform group-hover:scale-110 transition-all duration-500`}
                       >
-                        {feature}
-                      </Badge>
-                    ))}
-                  </div>
-
-                  {/* Learn More Button */}
-                  <Link
-                    href={`/services/${service.title.toLowerCase().replace(/\s+/g, "-").replace("&", "").replace(/\s+/g, "-")}`}
-                  >
-                    <Button
-                      variant="ghost"
-                      className="group/btn w-full justify-between p-0 h-auto text-left hover:bg-transparent font-medium"
+                        <IconComponent className="h-8 w-8 text-white" />
+                      </div>
+                      <div className="text-right">
+                        <div className="text-sm text-gray-400 font-mono">0{index + 1}</div>
+                      </div>
+                    </div>
+                    <CardTitle className="text-2xl font-bold text-gray-900 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-purple-600 group-hover:bg-clip-text transition-all duration-300">
+                      {service.title}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="relative">
+                    <CardDescription className="text-gray-600 mb-6 leading-relaxed text-base">
+                      {service.shortDescription || service.description}
+                    </CardDescription>
+                    {/* Feature Tags */}
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      {(service.features || []).map((feature: string, featureIndex: number) => (
+                        <Badge
+                          key={featureIndex}
+                          variant="secondary"
+                          className="text-xs px-3 py-1 bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors"
+                        >
+                          {feature}
+                        </Badge>
+                      ))}
+                    </div>
+                    {/* Learn More Button */}
+                    <Link
+                      href={`/services/${service.slug}`}
                     >
-                      <span className="text-blue-600 group-hover:text-purple-600 transition-colors">Learn More</span>
-                      <ArrowRight className="h-4 w-4 text-blue-600 group-hover/btn:text-purple-600 group-hover/btn:translate-x-1 transition-all" />
-                    </Button>
-                  </Link>
-                </CardContent>
-              </Card>
-            ))}
+                      <Button
+                        variant="ghost"
+                        className="group/btn w-full justify-between p-0 h-auto text-left hover:bg-transparent font-medium"
+                      >
+                        <span className="text-blue-600 group-hover:text-purple-600 transition-colors">Learn More</span>
+                        <ArrowRight className="h-4 w-4 text-blue-600 group-hover/btn:text-purple-600 group-hover/btn:translate-x-1 transition-all" />
+                      </Button>
+                    </Link>
+                  </CardContent>
+                </Card>
+              );
+            })}
           </div>
+          {services.length > 6 && (
+            <div className="flex justify-center mt-10">
+              <Link href="/services">
+                <Button size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 px-8 py-4 text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-2xl">
+                  More Services
+                </Button>
+              </Link>
+            </div>
+          )}
         </div>
       </section>
 

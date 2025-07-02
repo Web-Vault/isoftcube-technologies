@@ -1,37 +1,60 @@
+'use client'
 import Link from "next/link"
-import { ArrowLeft, Home } from "lucide-react"
+import { ArrowLeft, Home, Cpu } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-purple-50 flex items-center justify-center">
-      <div className="text-center space-y-8 max-w-md mx-auto px-6">
-        <div className="space-y-4">
-          <h1 className="text-9xl font-bold text-transparent bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text">
-            404
-          </h1>
-          <h2 className="text-2xl font-bold text-gray-900">Page Not Found</h2>
-          <p className="text-gray-600">
-            Sorry, we couldn't find the page you're looking for. It might have been moved, deleted, or you entered the
-            wrong URL.
+    <div className="min-h-screen w-full flex flex-col items-center justify-center bg-slate-950 px-4">
+      <div className="flex flex-col items-center justify-center w-full max-w-xl mx-auto py-24">
+        <Cpu className="h-14 w-14 text-blue-500 mb-6 animate-fade-in-delayed" />
+        <h1 className="text-7xl md:text-9xl font-extrabold text-white tracking-tight mb-2 animate-squeeze">404</h1>
+        <div className="w-full flex flex-col items-center animate-fade-in-delayed2">
+          <h2 className="text-2xl md:text-3xl font-semibold text-blue-500 mb-4">Page Not Found</h2>
+          <p className="text-base md:text-lg text-slate-300 text-center mb-10 max-w-md">
+            Sorry, the page you&apos;re looking for doesn&apos;t exist or has been moved.<br />
+            Let&apos;s get you back to where you belong.
           </p>
-        </div>
-
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button asChild className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700">
-            <Link href="/">
-              <Home className="mr-2 h-4 w-4" />
-              Go Home
-            </Link>
-          </Button>
-          <Button variant="outline" asChild>
-            <Link href="javascript:history.back()">
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Go Back
-            </Link>
-          </Button>
+          <div className="flex flex-col sm:flex-row gap-4 w-full justify-center">
+            <Button asChild size="lg" className="bg-blue-600 hover:bg-blue-700 text-white font-semibold">
+              <Link href="/">
+                <Home className="mr-2 h-5 w-5" />
+                Go Home
+              </Link>
+            </Button>
+            <Button variant="outline" asChild size="lg" className="border-blue-600 text-blue-500 hover:bg-blue-50 font-semibold">
+              <Link href="javascript:history.back()">
+                <ArrowLeft className="mr-2 h-5 w-5" />
+                Go Back
+              </Link>
+            </Button>
+          </div>
         </div>
       </div>
+      <style jsx global>{`
+        @keyframes squeeze {
+          0% { transform: scaleY(1); }
+          20% { transform: scaleY(0.5) scaleX(1.2); }
+          40% { transform: scaleY(1.15) scaleX(0.95); }
+          60% { transform: scaleY(0.92) scaleX(1.05); }
+          80% { transform: scaleY(1.05) scaleX(0.98); }
+          100% { transform: scaleY(1) scaleX(1); }
+        }
+        .animate-squeeze {
+          animation: squeeze 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+        @keyframes fade-in-delayed {
+          0% { opacity: 0; }
+          60% { opacity: 0; }
+          100% { opacity: 1; }
+        }
+        .animate-fade-in-delayed {
+          animation: fade-in-delayed 1.2s 0.2s both;
+        }
+        .animate-fade-in-delayed2 {
+          animation: fade-in-delayed 1.2s 0.5s both;
+        }
+      `}</style>
     </div>
   )
 }
