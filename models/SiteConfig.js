@@ -18,8 +18,7 @@ const SiteConfigSchema = new mongoose.Schema({
     linkedin: String,
     Instagram: String,
     // ...etc
-  },
-  adminPhone: String,
+  }
   // ...add more as needed
 });
 
