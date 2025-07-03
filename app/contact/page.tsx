@@ -1,8 +1,7 @@
 "use client"
 
 import type React from "react"
-
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Mail, Phone, MapPin, Clock, Badge } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -15,6 +14,7 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet"
 import L from "leaflet"
 
 // Fix default icon issue in Next.js/Leaflet
+// @ts-ignore
 delete L.Icon.Default.prototype._getIconUrl
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
@@ -23,7 +23,7 @@ L.Icon.Default.mergeOptions({
 })
 
 // Use your actual office coordinates
-const position = [23.0262791, 72.475893]
+const position: [number, number] = [23.0262791, 72.475893]
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -33,6 +33,25 @@ export default function ContactPage() {
     service: "",
     message: "",
   })
+  const [siteConfig, setSiteConfig] = useState<any>(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    async function fetchConfig() {
+      try {
+        const res = await fetch("/api/siteconfig")
+        if (!res.ok) throw new Error("Failed to fetch site config")
+        const data = await res.json()
+        setSiteConfig(data)
+      } catch (err: any) {
+        setError(err.message)
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchConfig()
+  }, [])
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -44,6 +63,33 @@ export default function ContactPage() {
   const handleChange = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
   }
+
+  const contactInfo = siteConfig ? [
+    {
+      icon: Phone,
+      title: "Phone",
+      details: siteConfig.contactPhones || [],
+    },
+    {
+      icon: Mail,
+      title: "Email",
+      details: siteConfig.contactEmails || [],
+    },
+    {
+      icon: MapPin,
+      title: "Address",
+      details: [siteConfig.contactAddress],
+    },
+    {
+      icon: Clock,
+      title: "Business Hours",
+      details: [
+        "Monday - Friday: 9:00 AM - 6:00 PM",
+        "Saturday: Closed",
+        "Sunday: Closed",
+      ],
+    },
+  ] : []
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-purple-50">
@@ -179,59 +225,21 @@ export default function ContactPage() {
                 <CardDescription>Get in touch with us through any of these channels</CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
-                <div className="flex items-start gap-4">
-                  <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-blue-600 to-cyan-600 flex items-center justify-center flex-shrink-0">
-                    <Phone className="h-5 w-5 text-white" />
+                {loading && <p>Loading contact info...</p>}
+                {error && <p className="text-red-500">{error}</p>}
+                {!loading && !error && contactInfo.map((info, idx) => (
+                  <div className="flex items-start gap-4" key={info.title}>
+                    <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-blue-600 to-cyan-600 flex items-center justify-center flex-shrink-0">
+                      <info.icon className="h-5 w-5 text-white" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-gray-900">{info.title}</h4>
+                      {info.details.map((line: string, i: number) => (
+                        <p className="text-gray-600" key={i}>{line}</p>
+                      ))}
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900">Phone</h4>
-                    <p className="text-gray-600">+91 99988 33373</p>
-                    {/* <p className="text-gray-600">+91 87584 99499</p> */}
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-blue-600 to-cyan-600 flex items-center justify-center flex-shrink-0">
-                    <Mail className="h-5 w-5 text-white" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900">Email</h4>
-                    <p className="text-gray-600">info@isoftcubetechnologies.com</p>
-                    <p className="text-gray-600">support@isoftcubetechnologies.com</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-blue-600 to-cyan-600 flex items-center justify-center flex-shrink-0">
-                    <MapPin className="h-5 w-5 text-white" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900">Address</h4>
-                    <p className="text-gray-600">
-                      717 Shivalik Satyamev
-                      <br />
-                      Nr. Valik Saheb OverBridge, S.P. Ring Road
-                      <br />
-                      Bopal, Ahmedabad - 380058
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-blue-600 to-cyan-600 flex items-center justify-center flex-shrink-0">
-                    <Clock className="h-5 w-5 text-white" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900">Business Hours</h4>
-                    <p className="text-gray-600">
-                      Monday - Friday: 9:00 AM - 6:00 PM
-                      <br />
-                      Saturday: Closed
-                      <br />
-                      Sunday: Closed
-                    </p>
-                  </div>
-                </div>
+                ))}
               </CardContent>
             </Card>
 
