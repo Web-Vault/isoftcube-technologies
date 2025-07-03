@@ -154,7 +154,7 @@ export default function Navbar() {
 
         {/* CTA Buttons */}
         <div className="hidden lg:flex items-center space-x-3">
-          <Button
+          {/* <Button
             variant="ghost"
             size="sm"
             className={`font-medium transition-all duration-300 ${
@@ -164,7 +164,7 @@ export default function Navbar() {
             }`}
           >
             Get Quote
-          </Button>
+          </Button> */}
           <Button
             size="sm"
             className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium px-6 py-2 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
