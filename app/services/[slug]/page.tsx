@@ -1,4 +1,6 @@
-import { notFound } from "next/navigation"
+"use client";
+
+import { useEffect, useState } from "react";
 import { ArrowLeft, CheckCircle, Star, ArrowRight, Code, Smartphone, Wifi, Cloud, Shield, Zap, Database, Cpu, Globe, Headphones } from "lucide-react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
@@ -20,30 +22,36 @@ const iconMap = {
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 
-async function getService(slug: string) {
-  const res = await fetch(`${baseUrl}/api/services/${slug}`, { cache: "no-store" });
-  if (!res.ok) return null;
-  // console.log(res.json());
-  return res.json();
-}
-
-async function getAllServices() {
-  const res = await fetch(`${baseUrl}/api/services`, { cache: "no-store" });
-  if (!res.ok) return [];
-  return res.json();
-}
-
-interface ServicePageProps {
-  params: { slug: string }
-}
-
-export default async function ServicePage({ params }: ServicePageProps) {
+export default function ServicePage({ params }: { params: { slug: string } }) {
   const { slug } = params;
-  const service = await getService(slug);
-  const services = await getAllServices();
+  const [service, setService] = useState<any>(null);
+  const [services, setServices] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const resService = await fetch(`${baseUrl}/api/services/${slug}`);
+        const resServices = await fetch(`${baseUrl}/api/services`);
+        const serviceData = resService.ok ? await resService.json() : null;
+        const servicesData = resServices.ok ? await resServices.json() : [];
+        setService(serviceData);
+        setServices(servicesData);
+      } catch (error) {
+        setService(null);
+        setServices([]);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchData();
+  }, [slug]);
+
+  if (loading) {
+    return <div className="min-h-screen flex items-center justify-center text-xl text-gray-500">Loading...</div>;
+  }
   if (!service) {
-    notFound();
+    return <div className="min-h-screen flex items-center justify-center text-xl text-gray-500">Service not found</div>;
   }
 
   const IconComponent = iconMap[service.icon as keyof typeof iconMap] || Code;
@@ -259,24 +267,4 @@ export default async function ServicePage({ params }: ServicePageProps) {
       </div>
     </div>
   )
-}
-
-export async function generateStaticParams() {
-  const res = await fetch(`${baseUrl}/api/services`, { cache: "no-store" });
-  const services = res.ok ? await res.json() : [];
-  return services.map((service: any) => ({ slug: service.slug }));
-}
-
-export async function generateMetadata({ params }: ServicePageProps) {
-  const { slug } = params;
-  const service = await getService(slug);
-  if (!service) {
-    return {
-      title: "Service Not Found",
-    };
-  }
-  return {
-    title: `${service.title} - iSoftcube Technologies`,
-    description: service.shortDescription,
-  };
 }
