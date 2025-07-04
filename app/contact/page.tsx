@@ -10,17 +10,25 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import "leaflet/dist/leaflet.css"
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet"
-import L from "leaflet"
+import dynamic from "next/dynamic"
 
-// Fix default icon issue in Next.js/Leaflet
-// @ts-ignore
-delete L.Icon.Default.prototype._getIconUrl
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
-  iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
-  shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
-})
+// Dynamically import MapContainer and related components with SSR disabled
+const MapContainer = dynamic(
+  () => import("react-leaflet").then(mod => mod.MapContainer),
+  { ssr: false }
+)
+const TileLayer = dynamic(
+  () => import("react-leaflet").then(mod => mod.TileLayer),
+  { ssr: false }
+)
+const Marker = dynamic(
+  () => import("react-leaflet").then(mod => mod.Marker),
+  { ssr: false }
+)
+const Popup = dynamic(
+  () => import("react-leaflet").then(mod => mod.Popup),
+  { ssr: false }
+)
 
 // Use your actual office coordinates
 const position: [number, number] = [23.0262791, 72.475893]
@@ -54,6 +62,21 @@ export default function ContactPage() {
     }
     fetchConfig()
   }, [])
+
+  useEffect(() => {
+    // Only run on client
+    if (typeof window !== "undefined") {
+      import("leaflet").then(L => {
+        // @ts-ignore
+        delete L.Icon.Default.prototype._getIconUrl;
+        L.Icon.Default.mergeOptions({
+          iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
+          iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
+          shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
+        });
+      });
+    }
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -204,13 +227,10 @@ export default function ContactPage() {
                 style={{ height: 350, width: "100%" }}
               >
                 <TileLayer
-                  // attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
                 <Marker position={position}>
-                  <Popup>We are Here <br />
-                    717-Shivalik Satyamev
-                  </Popup>
+                  <Popup>We are Here <br />717-Shivalik Satyamev</Popup>
                 </Marker>
               </MapContainer>
             </div>
