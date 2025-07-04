@@ -120,9 +120,7 @@ export default function AboutPage() {
               <Card key={index} className="text-center border-0 shadow-lg">
                 <CardHeader>
                   <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-br from-blue-600 to-cyan-600 overflow-hidden flex items-center justify-center">
-                    {member.image && (
-                      <img src={member.image} alt={member.name} className="w-full h-full object-cover rounded-full" />
-                    )}
+                    <img src={member.image || "/placeholder-user.jpg"} alt={member.name} className="w-full h-full object-cover rounded-full" />
                   </div>
                   <CardTitle className="text-lg">{member.name}</CardTitle>
                   <CardDescription>
