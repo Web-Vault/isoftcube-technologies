@@ -1,0 +1,153 @@
+Folder PATH listing for volume New Volume
+Volume serial number is BABB-2B09
+E:.
+|   .env.local
+|   .gitignore
+|   components.json
+|   job-data.js
+|   next-env.d.ts
+|   next.config.mjs
+|   package-lock.json
+|   package.json
+|   pnpm-lock.yaml
+|   postcss.config.mjs
+|   seed-aboutpage.js
+|   seed-jobs.js
+|   seed-services.js
+|   seed-siteconfig.js
+|   seed.js
+|   services-data.js
+|   structure.txt
+|   tailwind.config.ts
+|   tsconfig.json
+|   
++---.next
+|                    
++---.vercel
+|       project.json
+|       README.txt
+|       
++---app
+|   |   globals.css
+|   |   layout.tsx
+|   |   not-found.tsx
+|   |   page.tsx
+|   |   
+|   +---about
+|   |       page.tsx
+|   |       
+|   +---api
+|   |   +---about
+|   |   |       route.ts
+|   |   |       
+|   |   +---jobs
+|   |   |       route.ts
+|   |   |       
+|   |   +---services
+|   |   |   |   route.ts
+|   |   |   |   
+|   |   |   \---[slug]
+|   |   |           route.ts
+|   |   |           
+|   |   \---siteconfig
+|   |           route.ts
+|   |           
+|   +---careers
+|   |       page.tsx
+|   |       
+|   +---contact
+|   |       page.tsx
+|   |       
+|   \---services
+|       |   page.tsx
+|       |   
+|       \---[slug]
+|               page.tsx
+|               
++---components
+|   |   footer.tsx
+|   |   job-application-modal.tsx
+|   |   navbar.tsx
+|   |   theme-provider.tsx
+|   |   
+|   \---ui
+|           accordion.tsx
+|           alert-dialog.tsx
+|           alert.tsx
+|           aspect-ratio.tsx
+|           avatar.tsx
+|           badge.tsx
+|           breadcrumb.tsx
+|           button.tsx
+|           calendar.tsx
+|           card.tsx
+|           carousel.tsx
+|           chart.tsx
+|           checkbox.tsx
+|           collapsible.tsx
+|           command.tsx
+|           context-menu.tsx
+|           dialog.tsx
+|           drawer.tsx
+|           dropdown-menu.tsx
+|           form.tsx
+|           hover-card.tsx
+|           input-otp.tsx
+|           input.tsx
+|           label.tsx
+|           menubar.tsx
+|           navigation-menu.tsx
+|           pagination.tsx
+|           popover.tsx
+|           progress.tsx
+|           radio-group.tsx
+|           resizable.tsx
+|           scroll-area.tsx
+|           select.tsx
+|           separator.tsx
+|           sheet.tsx
+|           sidebar.tsx
+|           skeleton.tsx
+|           slider.tsx
+|           sonner.tsx
+|           switch.tsx
+|           table.tsx
+|           tabs.tsx
+|           textarea.tsx
+|           toast.tsx
+|           toaster.tsx
+|           toggle-group.tsx
+|           toggle.tsx
+|           tooltip.tsx
+|           use-mobile.tsx
+|           use-toast.ts
+|           
++---hooks
+|       use-mobile.tsx
+|       use-toast.ts
+|       
++---lib
+|       jobs-config.ts
+|       mongodb.ts
+|       services-config.ts
+|       utils.ts
+|       
++---models
+|       AboutPage.js
+|       Job.js
+|       Service.js
+|       SiteConfig.js
+|       
++---node_modules
+|              
++---public
+|       favicon-96x96-1.png
+|       placeholder-logo.png
+|       placeholder-logo.svg
+|       placeholder-user.jpg
+|       placeholder.jpg
+|       placeholder.svg
+|       
+\---styles
+        globals.css
+        
