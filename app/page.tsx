@@ -29,9 +29,10 @@ const iconMap = {
 
 export default function HomePage() {
   const [services, setServices] = useState<any[]>([]);
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 
   useEffect(() => {
-    fetch("/api/services")
+    fetch(`${baseUrl}/api/services`)
       .then(res => res.json())
       .then(data => setServices(data));
   }, []);

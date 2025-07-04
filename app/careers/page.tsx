@@ -63,8 +63,11 @@ export default function CareersPage() {
     experience: "all",
   })
 
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+
+
   useEffect(() => {
-    fetch("/api/jobs")
+    fetch(`${baseUrl}/api/jobs`)
       .then(res => res.json())
       .then(data => {
         setJobs(data)

@@ -37,10 +37,12 @@ export default function ContactPage() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+
   useEffect(() => {
     async function fetchConfig() {
       try {
-        const res = await fetch("/api/siteconfig")
+        const res = await fetch(`${baseUrl}/api/siteconfig`)
         if (!res.ok) throw new Error("Failed to fetch site config")
         const data = await res.json()
         setSiteConfig(data)

@@ -16,8 +16,10 @@ export default function AboutPage() {
   const [about, setAbout] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+
   useEffect(() => {
-    fetch("/api/about")
+    fetch(`${baseUrl}//api/about`)
       .then((res) => res.json())
       .then((data) => {
         setAbout(data);

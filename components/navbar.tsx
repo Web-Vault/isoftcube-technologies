@@ -37,14 +37,16 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+
   useEffect(() => {
-    fetch("/api/services")
+    fetch(`${baseUrl}/api/services`)
       .then(res => res.json())
       .then(data => setServices(data));
   }, []);
 
   useEffect(() => {
-    fetch('/api/siteconfig')
+    fetch(`${baseUrl}/api/siteconfig`)
       .then(res => res.json())
       .then(data => setSiteConfig(data));
   }, []);
