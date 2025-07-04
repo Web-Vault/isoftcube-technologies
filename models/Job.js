@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const JobSchema = new mongoose.Schema(
   {
-    id: { type: String, required: true, unique: true },
+    slug: { type: String, required: true, unique: true },
     title: String,
     department: String,
     location: String,

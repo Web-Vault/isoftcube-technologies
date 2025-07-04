@@ -1,6 +1,6 @@
 export const jobs = [
   {
-    id: "senior-fullstack-dev",
+    slug: "senior-fullstack-dev",
     title: "Senior Full Stack Developer",
     department: "Engineering",
     location: "San Francisco, CA / Remote",
@@ -37,7 +37,7 @@ export const jobs = [
 //     postedDate: "2024-01-15",
   },
   {
-    id: "mobile-app-developer",
+    slug: "mobile-app-developer",
     title: "Mobile App Developer (React Native)",
     department: "Engineering",
     location: "New York, NY / Remote",
@@ -74,7 +74,7 @@ export const jobs = [
 //     postedDate: "2024-01-10",
   },
   {
-    id: "cybersecurity-specialist",
+    slug: "cybersecurity-specialist",
     title: "Cybersecurity Specialist",
     department: "Security",
     location: "Austin, TX",
@@ -111,7 +111,7 @@ export const jobs = [
 //     postedDate: "2024-01-08",
   },
   {
-    id: "cloud-architect",
+    slug: "cloud-architect",
     title: "Cloud Solutions Architect",
     department: "Infrastructure",
     location: "Seattle, WA / Remote",
@@ -148,7 +148,7 @@ export const jobs = [
 //     postedDate: "2024-01-05",
   },
   {
-    id: "project-manager",
+    slug: "project-manager",
     title: "Technical Project Manager",
     department: "Operations",
     location: "Chicago, IL / Hybrid",
@@ -185,7 +185,7 @@ export const jobs = [
 //     postedDate: "2024-01-03",
   },
   {
-    id: "ui-ux-designer",
+    slug: "ui-ux-designer",
     title: "Senior UI/UX Designer",
     department: "Design",
     location: "Los Angeles, CA / Remote",
@@ -222,7 +222,7 @@ export const jobs = [
 //     postedDate: "2024-01-01",
   },
   {
-    id: "database-administrator",
+    slug: "database-administrator",
     title: "Database Administrator",
     department: "Infrastructure",
     location: "Denver, CO",
@@ -259,7 +259,7 @@ export const jobs = [
 //     postedDate: "2023-12-28",
   },
   {
-    id: "customer-success-manager",
+    slug: "customer-success-manager",
     title: "Customer Success Manager",
     department: "Customer Success",
     location: "Miami, FL / Remote",

@@ -290,11 +290,11 @@ export default function CareersPage() {
           {/* Expandable Job Cards */}
           <div className="grid gap-6">
             {filteredJobs.map((job, index) => {
-              const isExpanded = expandedJobs.has(job.id)
+              const isExpanded = expandedJobs.has(job.slug)
               const IconComponent = iconMap[job.icon as keyof typeof iconMap] || Briefcase;
               return (
                 <Card
-                  key={job.id}
+                  key={job.slug}
                   className="group relative overflow-hidden border-0 shadow-lg hover:shadow-xl transition-all duration-500 bg-white"
                   style={{ animationDelay: `${index * 50}ms` }}
                 >
@@ -420,7 +420,7 @@ export default function CareersPage() {
                       <div className="flex items-center justify-between pt-6">
                         <Button
                           variant="ghost"
-                          onClick={() => toggleJobExpansion(job.id)}
+                          onClick={() => toggleJobExpansion(job.slug)}
                           className="flex items-center gap-2 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium"
                         >
                           {isExpanded ? (
