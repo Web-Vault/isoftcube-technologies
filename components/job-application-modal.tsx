@@ -13,8 +13,10 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Badge } from "@/components/ui/badge"
 import type { Job } from "@/lib/jobs-config"
 
+type JobWithId = Job & { _id?: string }
+
 interface JobApplicationModalProps {
-  job: Job | null
+  job: JobWithId | null
   isOpen: boolean
   onClose: () => void
 }
@@ -30,28 +32,105 @@ export default function JobApplicationModal({ job, isOpen, onClose }: JobApplica
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [currentStep, setCurrentStep] = useState(1)
+  const [uploadingResume, setUploadingResume] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const [success, setSuccess] = useState<string | null>(null)
+
+  async function uploadResume(file: File): Promise<string | null> {
+    const formData = new FormData()
+    formData.append("file", file)
+    setUploadingResume(true)
+    setError(null)
+    try {
+      const res = await fetch("/api/upload", {
+        method: "POST",
+        body: formData,
+      })
+      if (!res.ok) throw new Error("Failed to upload resume")
+      const data = await res.json()
+      return data.url
+    } catch (err: any) {
+      setError(err.message || "Resume upload failed")
+      return null
+    } finally {
+      setUploadingResume(false)
+    }
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
-
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 2000))
-
-    alert(`Thank you for applying to ${job?.title}! We'll review your application and get back to you soon.`)
-
-    // Reset form
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      experience: "",
-      coverLetter: "",
-      resume: null,
-    })
-    setCurrentStep(1)
-    setIsSubmitting(false)
-    onClose()
+    setError(null)
+    setSuccess(null)
+    let resumeUrl = null
+    if (formData.resume) {
+      resumeUrl = await uploadResume(formData.resume)
+      if (!resumeUrl) {
+        setIsSubmitting(false)
+        setError("Resume upload failed. Please try again.")
+        return
+      }
+    }
+    try {
+      // Log job object for debugging
+      console.log('Job object:', job);
+      // Log all form details including resumeUrl
+      console.log({
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        experience: formData.experience,
+        coverLetter: formData.coverLetter,
+        resumeUrl,
+        jobId: job?._id,
+      });
+      const response = await fetch("/api/job-applications", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          experience: formData.experience,
+          coverLetter: formData.coverLetter,
+          resumeUrl,
+          jobId: job?._id,
+        }),
+      })
+      if (!response.ok) {
+        const data = await response.json()
+        throw new Error(data.error || "Failed to submit application")
+      }
+      // Store submitted data in localStorage for the success page
+      const submittedData = {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        experience: formData.experience,
+        coverLetter: formData.coverLetter,
+        resumeUrl,
+        job: job,
+      };
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('jobApplicationSubmittedData', JSON.stringify(submittedData));
+        window.location.href = '/job-application-success';
+      }
+      setSuccess("Thank you for applying! We'll review your application and get back to you soon.")
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        experience: "",
+        coverLetter: "",
+        resume: null,
+      })
+      setCurrentStep(1)
+      onClose()
+    } catch (err: any) {
+      setError(err.message || "Failed to submit application")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -384,14 +463,14 @@ export default function JobApplicationModal({ job, isOpen, onClose }: JobApplica
                 <Button
                   type="submit"
                   disabled={
-                    isSubmitting || !formData.name || !formData.email || !formData.experience || !formData.resume
+                    isSubmitting || uploadingResume || !formData.name || !formData.email || !formData.experience || !formData.resume
                   }
                   className="px-8 py-3 bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {isSubmitting ? (
+                  {isSubmitting || uploadingResume ? (
                     <div className="flex items-center gap-2">
                       <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                      Submitting Application...
+                      {uploadingResume ? "Uploading Resume..." : "Submitting Application..."}
                     </div>
                   ) : (
                     "Submit Application"
