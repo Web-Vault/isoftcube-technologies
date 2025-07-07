@@ -44,6 +44,9 @@ export default function ContactPage() {
   const [siteConfig, setSiteConfig] = useState<any>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [submitting, setSubmitting] = useState(false)
+  const [submitSuccess, setSubmitSuccess] = useState<string | null>(null)
+  const [submitError, setSubmitError] = useState<string | null>(null)
 
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 
@@ -78,11 +81,26 @@ export default function ContactPage() {
     }
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle form submission here
-    console.log("Form submitted:", formData)
-    alert("Thank you for your message! We'll get back to you soon.")
+    setSubmitting(true)
+    setSubmitSuccess(null)
+    setSubmitError(null)
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      })
+      const data = await res.json()
+      if (!res.ok) throw new Error(data.error || 'Failed to submit form')
+      setSubmitSuccess("Thank you for your message! We'll get back to you soon.")
+      setFormData({ name: '', email: '', company: '', service: '', message: '' })
+    } catch (err: any) {
+      setSubmitError(err.message || 'Something went wrong. Please try again.')
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   const handleChange = (field: string, value: string) => {
@@ -146,6 +164,12 @@ export default function ContactPage() {
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleSubmit} className="space-y-6">
+                  {submitSuccess && (
+                    <div className="p-3 rounded bg-green-100 text-green-800 text-center">{submitSuccess}</div>
+                  )}
+                  {submitError && (
+                    <div className="p-3 rounded bg-red-100 text-red-800 text-center">{submitError}</div>
+                  )}
                   <div className="grid md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <Label htmlFor="name">Full Name *</Label>
@@ -212,8 +236,9 @@ export default function ContactPage() {
                     type="submit"
                     size="lg"
                     className="w-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700"
+                    disabled={submitting}
                   >
-                    Send Message
+                    {submitting ? 'Sending...' : 'Send Message'}
                   </Button>
                 </form>
               </CardContent>
