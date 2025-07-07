@@ -15,6 +15,7 @@ const stats = [
 export default function AboutPage() {
   const [about, setAbout] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [siteName, setSiteName] = useState<string>("");
 
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 
@@ -24,6 +25,14 @@ export default function AboutPage() {
       .then((data) => {
         setAbout(data);
         setLoading(false);
+      });
+  }, []);
+
+  useEffect(() => {
+    fetch("/api/siteconfig")
+      .then(res => res.json())
+      .then(data => {
+        if (data.siteName) setSiteName(data.siteName);
       });
   }, []);
 
@@ -39,7 +48,12 @@ export default function AboutPage() {
       <section className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white py-[100px]">
         <div className="container mx-auto px-6">
           <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">About {process.env.NEXT_PUBLIC_SITE_NAME || "iSoftcube Technologies"}</h1>
+            <h1 className="text-4xl md:text-6xl font-bold mb-6">
+              About <br />
+              <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
+                {siteName || "iSoftcube Technologies"}
+              </span>
+            </h1>
             <p className="text-xl text-gray-300 leading-relaxed">
               {about.sections && about.sections[0]?.content}
             </p>

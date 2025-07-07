@@ -1,9 +1,7 @@
 "use client"
 
-import type React from "react"
-
-import { useState } from "react"
-import { Upload, FileText, User, Briefcase, X, CheckCircle } from "lucide-react"
+import React, { useState } from "react"
+import { Upload, FileText, User, Briefcase, X, CheckCircle, Shield, Code, Smartphone, Wifi, Cloud, Palette, Database, Headphones } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -12,6 +10,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Badge } from "@/components/ui/badge"
 import type { Job } from "@/lib/jobs-config"
+import toast from "react-hot-toast"
 
 type JobWithId = Job & { _id?: string }
 
@@ -19,6 +18,17 @@ interface JobApplicationModalProps {
   job: JobWithId | null
   isOpen: boolean
   onClose: () => void
+}
+
+const iconMap: Record<string, React.ElementType> = {
+  Shield,
+  Code,
+  Smartphone,
+  Wifi,
+  Cloud,
+  Palette,
+  Database,
+  Headphones,
 }
 
 export default function JobApplicationModal({ job, isOpen, onClose }: JobApplicationModalProps) {
@@ -101,20 +111,12 @@ export default function JobApplicationModal({ job, isOpen, onClose }: JobApplica
         const data = await response.json()
         throw new Error(data.error || "Failed to submit application")
       }
-      // Store submitted data in localStorage for the success page
-      const submittedData = {
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone,
-        experience: formData.experience,
-        coverLetter: formData.coverLetter,
-        resumeUrl,
-        job: job,
-      };
-      if (typeof window !== 'undefined') {
-        localStorage.setItem('jobApplicationSubmittedData', JSON.stringify(submittedData));
-        window.location.href = '/job-application-success';
-      }
+      // toast({
+      //   title: "Application Submitted!",
+      //   description: "Thank you for applying! We'll review your application and get back to you soon.",
+      //   status: "success",
+      // });
+      toast.success("Application submitted successfully.");
       setSuccess("Thank you for applying! We'll review your application and get back to you soon.")
       setFormData({
         name: "",
@@ -164,19 +166,23 @@ export default function JobApplicationModal({ job, isOpen, onClose }: JobApplica
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               <div className="p-3 rounded-xl bg-gradient-to-br from-blue-500 to-purple-500 shadow-lg">
-                {job.icon ? <job.icon className="h-6 w-6 text-white" /> : <code className="h-6 w-6 text-white" />}
-                
+                {typeof job.icon === "string" && iconMap[job.icon as keyof typeof iconMap]
+                  ? React.createElement(iconMap[job.icon as keyof typeof iconMap], { className: "h-6 w-6 text-white" })
+                  : <code className="h-6 w-6 text-white" />}
               </div>
               <div>
                 <DialogTitle className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                   Apply for {job.title}
                 </DialogTitle>
-                <DialogDescription className="flex items-center gap-2 mt-2">
+                <div className="flex items-center gap-2 mt-2">
                   <Badge className="bg-blue-100 text-blue-800 border-0">{job.department}</Badge>
                   <Badge variant="outline" className="border-purple-200 text-purple-700">
                     {job.location}
                   </Badge>
                   <Badge variant="secondary">{job.type}</Badge>
+                </div>
+                <DialogDescription>
+                  {/* Add any plain text description here if needed */}
                 </DialogDescription>
               </div>
             </div>
