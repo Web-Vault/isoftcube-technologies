@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react";
-import { ArrowRight, Code, Smartphone, Wifi, Cloud, Shield, Zap, Play, Star, Users, Award } from "lucide-react"
+import { ArrowRight, Code, Smartphone, Wifi, Cloud, Shield, Zap, Play, Star, Users, Award, Quote } from "lucide-react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -36,6 +36,164 @@ export default function HomePage() {
       .then(res => res.json())
       .then(data => setServices(data));
   }, []);
+
+  // Carousel for Google Reviews
+  function GoogleReviewsCarousel() {
+    const [reviews, setReviews] = useState<any[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [current, setCurrent] = useState(0);
+    const total = reviews.length;
+
+    useEffect(() => {
+      setLoading(true);
+      fetch('/api/reviews')
+        .then(res => res.json())
+        .then(data => {
+          setReviews(Array.isArray(data) ? data : []);
+          setLoading(false);
+        })
+        .catch(() => setLoading(false));
+    }, []);
+
+    const prev = () => setCurrent((prev) => (prev === 0 ? total - 1 : prev - 1));
+    const next = () => setCurrent((prev) => (prev === total - 1 ? 0 : prev + 1));
+
+    if (loading) {
+      return (
+        <div className="w-full flex justify-center items-center py-20">
+          <span className="text-lg text-gray-500 animate-pulse">Loading reviews...</span>
+        </div>
+      );
+    }
+
+    if (!reviews.length) {
+      return (
+        <div className="w-full flex justify-center items-center py-20">
+          <span className="text-lg text-gray-500">No reviews found.</span>
+        </div>
+      );
+    }
+
+    const review = reviews[current];
+
+    return (
+      <div className="w-full max-w-4xl mx-auto flex flex-col items-center relative">
+        <div className="flex w-full items-center justify-center gap-4 md:gap-8 relative">
+          {/* Previous review preview */}
+          <div className="hidden md:flex flex-col items-center flex-shrink-0 w-1/4 opacity-40 scale-90 blur-sm pointer-events-none select-none transition-all duration-300">
+            {(() => {
+              const prevIndex = current === 0 ? reviews.length - 1 : current - 1;
+              const prevReview = reviews[prevIndex];
+              return (
+                <div className="bg-gradient-to-br from-white/70 via-blue-50/60 to-purple-50/60 rounded-2xl shadow border border-blue-100/30 px-4 pt-10 pb-6 w-full flex flex-col items-center relative min-h-[320px] max-w-xs">
+                  <img
+                    src={prevReview.reviewer_picture_url}
+                    alt={prevReview.reviewer_name}
+                    className="w-14 h-14 rounded-full border-2 border-blue-300 shadow bg-white object-cover absolute -top-7 left-1/2 -translate-x-1/2 z-20"
+                    style={{ zIndex: 20 }}
+                  />
+                  <div className="mt-8 text-center text-base font-medium text-gray-700 line-clamp-3">{prevReview.text}</div>
+                  <div className="mt-4 text-sm text-gray-500">{prevReview.reviewer_name}</div>
+                </div>
+              );
+            })()}
+          </div>
+
+          {/* Main review card */}
+          <div className="relative flex-1 flex flex-col items-center z-10">
+            {/* Navigation buttons outside the card */}
+            <button
+              onClick={prev}
+              className="absolute -left-8 top-1/2 -translate-y-1/2 z-20 rounded-full bg-white/60 backdrop-blur shadow-lg border border-blue-100 hover:bg-blue-100 p-3 transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              aria-label="Previous review"
+              style={{ boxShadow: '0 4px 24px 0 rgba(59,130,246,0.10)' }}
+            >
+              <ArrowRight className="rotate-180 text-blue-600 w-6 h-6" />
+            </button>
+            <button 
+              onClick={next}
+              className="absolute -right-8 top-1/2 -translate-y-1/2 z-20 rounded-full bg-white/60 backdrop-blur shadow-lg border border-blue-100 hover:bg-blue-100 p-3 transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              aria-label="Next review"
+              style={{ boxShadow: '0 4px 24px 0 rgba(168,85,247,0.10)' }}
+            >
+              <ArrowRight className="text-blue-600 w-6 h-6" />
+            </button>
+            <div
+              className="bg-gradient-to-br from-white/80 via-blue-50/80 to-purple-50/80 rounded-3xl shadow-2xl border border-blue-100/40 px-8 pt-16 pb-10 w-full flex flex-col items-center relative"
+              style={{ minHeight: 440, maxWidth: 480, boxShadow: '0 8px 32px 0 rgba(59,130,246,0.10), 0 1.5px 0 0 #a5b4fc' }}
+            >
+              {/* Floating avatar */}
+              <div className="absolute -top-12 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center">
+                <img
+                  src={review.reviewer_picture_url}
+                  alt={review.reviewer_name}
+                  className="w-24 h-24 rounded-full border-4 border-blue-400 shadow-xl bg-white object-cover z-30"
+                  style={{ boxShadow: '0 4px 24px 0 rgba(59,130,246,0.15)', zIndex: 30 }}
+                />
+                <Badge className="mt-2 px-3 py-1 bg-blue-100 text-blue-700 border-0 font-medium flex items-center gap-1 shadow-sm z-20">
+                  <svg width="18" height="18" viewBox="0 0 48 48" className="inline-block mr-1"><g><path fill="#4285F4" d="M43.611 20.083H42V20H24v8h11.303C33.973 32.833 29.418 36 24 36c-6.627 0-12-5.373-12-12s5.373-12 12-12c2.69 0 5.166.896 7.163 2.393l6.084-6.084C33.684 6.053 28.994 4 24 4 12.954 4 4 12.954 4 24s8.954 20 20 20c11.045 0 19.824-8.955 19.824-20 0-1.341-.138-2.651-.213-3.917z"/><path fill="#34A853" d="M6.306 14.691l6.571 4.819C14.655 16.104 19.001 13 24 13c2.69 0 5.166.896 7.163 2.393l6.084-6.084C33.684 6.053 28.994 4 24 4c-7.732 0-14.41 4.388-17.694 10.691z"/><path fill="#FBBC05" d="M24 44c5.356 0 10.065-1.797 13.82-4.889l-6.383-5.238C29.418 36 24 36 24 36c-5.408 0-9.963-3.167-11.303-8.083l-6.571 5.081C9.59 39.612 16.268 44 24 44z"/><path fill="#EA4335" d="M43.611 20.083H42V20H24v8h11.303c-1.13 3.833-5.685 8-11.303 8-5.408 0-9.963-3.167-11.303-8.083l-6.571 5.081C9.59 39.612 16.268 44 24 44c7.732 0 14.41-4.388 17.694-10.691z"/></g></svg>
+                  Google Review
+                </Badge>
+              </div>
+              {/* Review text with faint quote icon and fade-out for overflow */}
+              <div className="relative w-full flex flex-col items-center min-h-[120px] max-h-44 mt-8 mb-6">
+                <Quote className="absolute top-0 left-1/2 -translate-x-1/2 text-blue-100 opacity-40 z-0" size={64} />
+                <p className="text-gray-800 text-base text-sm font-medium italic text-center px-2 z-10 w-full transition-all duration-300 relative" style={{maxHeight: '140px', overflow: 'hidden', display: '-webkit-box', WebkitLineClamp: 5, WebkitBoxOrient: 'vertical'}}>
+                  {review.text}
+                </p>
+                {/* Fade-out for overflow */}
+                <div className="pointer-events-none absolute bottom-0 left-0 w-full h-8 bg-gradient-to-t from-white/90 to-transparent z-20" />
+              </div>
+              {/* Divider */}
+              <div className="w-16 h-1 rounded-full bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 opacity-40 mx-auto mb-4" />
+              {/* Reviewer info */}
+              <div className="flex flex-col items-center">
+                <div className="font-bold text-lg text-gray-900 mb-1 text-center">{review.reviewer_name}</div>
+                <div className="flex items-center justify-center mb-2">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star
+                      key={i}
+                      className={`h-5 w-5 ${i < review.rating ? 'text-yellow-400' : 'text-gray-300'}`}
+                      fill={i < review.rating ? '#facc15' : 'none'}
+                    />
+                  ))}
+                </div>
+              </div>
+              <div className="mt-4 text-sm text-gray-400 text-center">{current + 1} / {total}</div>
+              <a
+                href="https://www.google.com/search?q=isoftcube+technologies+reviews"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 inline-block text-blue-700 hover:text-purple-700 hover:underline text-sm font-semibold transition-colors"
+              >
+                See all reviews on Google
+              </a>
+            </div>
+          </div>
+
+          {/* Next review preview */}
+          <div className="hidden md:flex flex-col items-center flex-shrink-0 w-1/4 opacity-40 scale-90 blur-sm pointer-events-none select-none transition-all duration-300">
+            {(() => {
+              const nextIndex = current === reviews.length - 1 ? 0 : current + 1;
+              const nextReview = reviews[nextIndex];
+              return (
+                <div className="bg-gradient-to-br from-white/70 via-blue-50/60 to-purple-50/60 rounded-2xl shadow border border-blue-100/30 px-4 pt-10 pb-6 w-full flex flex-col items-center relative min-h-[320px] max-w-xs">
+                  <img
+                    src={nextReview.reviewer_picture_url}
+                    alt={nextReview.reviewer_name}
+                    className="w-14 h-14 rounded-full border-2 border-blue-300 shadow bg-white object-cover absolute -top-7 left-1/2 -translate-x-1/2 z-20"
+                    style={{ zIndex: 20 }}
+                  />
+                  <div className="mt-8 text-center text-base font-medium text-gray-700 line-clamp-3">{nextReview.text}</div>
+                  <div className="mt-4 text-sm text-gray-500">{nextReview.reviewer_name}</div>
+                </div>
+              );
+            })()}
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col min-h-screen overflow-hidden">
@@ -301,6 +459,23 @@ export default function HomePage() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* testimonials section - show google reviews here. */}
+      <section className="py-24 bg-gradient-to-b from-white to-blue-50 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-50/30 to-purple-50/30"></div>
+        <div className="relative mx-auto max-w-7xl px-6">
+          <div className="text-center mb-16">
+            <Badge className="mb-4 px-4 py-2 bg-yellow-100 text-yellow-800 border-0 font-medium">Testimonials</Badge>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 leading-tight">
+              What Our Clients Say
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+              Real feedback from our valued clients on Google
+            </p>
+          </div>
+          <GoogleReviewsCarousel />
         </div>
       </section>
 
