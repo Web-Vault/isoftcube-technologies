@@ -141,7 +141,7 @@ export default function Navbar() {
             </DropdownMenuContent>
           </DropdownMenu>
 
-          {["About", "Contact", "Careers"].map((item) => (
+          {["About", "Contact", "Careers", "Blogs"].map((item) => (
             <Link
               key={item}
               href={`/${item.toLowerCase()}`}
@@ -191,7 +191,9 @@ export default function Navbar() {
             </Button>
           </SheetTrigger>
           <SheetContent side="right" className="w-80 bg-white/95 backdrop-blur-md">
-            <div className="flex flex-col space-y-6 mt-8">
+            {/* Visually hidden title for accessibility */}
+            <span className="sr-only" id="mobile-nav-title">Main Navigation</span>
+            <div className="flex flex-col space-y-6 mt-8 overflow-y-auto" aria-labelledby="mobile-nav-title">
               <Link
                 href="/"
                 className="text-lg font-semibold text-gray-900 hover:text-blue-600 transition-colors duration-200 p-2 rounded-lg hover:bg-blue-50"
@@ -220,7 +222,7 @@ export default function Navbar() {
                 </div>
               </div>
 
-              {["About", "Contact", "Careers"].map((item) => (
+              {["About", "Contact", "Careers", "Blogs"].map((item) => (
                 <Link
                   key={item}
                   href={`/${item.toLowerCase()}`}

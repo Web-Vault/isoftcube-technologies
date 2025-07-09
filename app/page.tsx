@@ -469,7 +469,7 @@ export default function HomePage() {
           <div className="text-center mb-16">
             <Badge className="mb-4 px-4 py-2 bg-yellow-100 text-yellow-800 border-0 font-medium">Testimonials</Badge>
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 leading-tight">
-              What Our Clients Say
+              What People Say About Us
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
               Real feedback from our valued clients on Google
