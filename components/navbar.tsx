@@ -155,7 +155,7 @@ export default function Navbar() {
         </nav>
 
         {/* CTA Buttons */}
-        <div className="hidden lg:flex items-center space-x-3">
+        {/* <div className="hidden lg:flex items-center space-x-3"> */}
           {/* <Button
             variant="ghost"
             size="sm"
@@ -167,13 +167,13 @@ export default function Navbar() {
           >
             Get Quote
           </Button> */}
-          <Button
+          {/* <Button
             size="sm"
             className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium px-6 py-2 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
           >
             Start Project
-          </Button>
-        </div>
+          </Button> */}
+        {/* </div> */}
 
         {/* Mobile Navigation */}
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -233,7 +233,7 @@ export default function Navbar() {
                 </Link>
               ))}
 
-              <div className="pt-6 space-y-3 border-t border-gray-200">
+              {/* <div className="pt-6 space-y-3 border-t border-gray-200">
                 <Button
                   variant="outline"
                   className="w-full bg-transparent border-2 border-gray-200 hover:border-blue-400 hover:text-blue-600"
@@ -243,7 +243,7 @@ export default function Navbar() {
                 <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-lg">
                   Start Project
                 </Button>
-              </div>
+              </div> */}
             </div>
           </SheetContent>
         </Sheet>

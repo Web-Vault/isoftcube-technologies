@@ -1,14 +1,30 @@
 "use client"
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { blogData } from "../../blog-data";
 import { FaThLarge, FaList, FaArrowRight } from "react-icons/fa";
 
 export default function BlogsPage() {
   const [hovered, setHovered] = useState<number | null>(null);
   const [layout, setLayout] = useState<'grid' | 'list'>('grid');
+  const [blogs, setBlogs] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchBlogs() {
+      setLoading(true);
+      const res = await fetch("/api/blogs");
+      const data = await res.json();
+      setBlogs(data);
+      setLoading(false);
+    }
+    fetchBlogs();
+  }, []);
+
+  if (loading) {
+    return <div className="min-h-screen flex items-center justify-center text-xl">Loading blogs...</div>;
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-purple-50 pb-20">
@@ -30,7 +46,7 @@ export default function BlogsPage() {
           <aside className="md:w-80 w-full md:sticky md:top-32 mb-8 md:mb-0">
             <nav className="bg-gradient-to-b from-white/95 to-blue-50/60 shadow-lg border border-blue-100/40 py-4 px-0 flex flex-col gap-0 rounded-2xl relative">
               <div className="px-6 pb-2 pt-1 text-xs font-bold tracking-widest text-blue-700/80 uppercase select-none">All Blogs</div>
-              {blogData.map((blog, idx) => (
+              {blogs.map((blog, idx) => (
                 <Link
                   key={blog.slug}
                   href={`#blog-${blog.slug}`}
@@ -52,7 +68,7 @@ export default function BlogsPage() {
           {/* Blog Main Section */}
           <main className="flex-1 flex flex-col">
             {/* Layout Switcher */}
-            <div className="flex items-center justify-end mb-8">
+            <div className="hidden md:flex items-center justify-end mb-8">
               <div className="flex items-center gap-3 bg-white/80 border border-blue-500 rounded-2xl px-4 py-2 shadow-sm">
                 <span className="text-sm font-medium text-gray-500 mr-2 select-none">View:</span>
                 <button
@@ -75,8 +91,8 @@ export default function BlogsPage() {
             </div>
             {/* Blog Grid/List */}
             {layout === 'grid' ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 h-full">
-                {blogData.map((blog, idx) => (
+              <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-10 h-full">
+                {blogs.map((blog, idx) => (
                   <Link
                     key={blog.slug}
                     id={`blog-${blog.slug}`}
@@ -131,7 +147,7 @@ export default function BlogsPage() {
               </div>
             ) : (
               <div className="flex flex-col gap-8">
-                {blogData.map((blog, idx) => (
+                {blogs.map((blog, idx) => (
                   <Link
                     key={blog.slug}
                     id={`blog-${blog.slug}`}

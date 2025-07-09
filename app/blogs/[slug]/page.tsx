@@ -1,11 +1,34 @@
-import React from "react";
-import { notFound } from "next/navigation";
-import { blogData } from "../../../blog-data";
+"use client"
+
+import React, { useEffect, useState } from "react";
+import { notFound, useParams } from "next/navigation";
 import Image from "next/image";
 
 export default function BlogDetailPage({ params }: { params: { slug: string } }) {
-  const blog = blogData.find((b) => b.slug === params.slug);
-  if (!blog) return notFound();
+  const [blog, setBlog] = useState<any | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [notFoundState, setNotFoundState] = useState(false);
+
+  useEffect(() => {
+    async function fetchBlog() {
+      setLoading(true);
+      const res = await fetch(`/api/blogs/${params.slug}`);
+      if (res.status === 404) {
+        setNotFoundState(true);
+        setLoading(false);
+        return;
+      }
+      const data = await res.json();
+      setBlog(data);
+      setLoading(false);
+    }
+    fetchBlog();
+  }, [params.slug]);
+
+  if (loading) {
+    return <div className="min-h-screen flex items-center justify-center text-xl">Loading blog...</div>;
+  }
+  if (notFoundState || !blog) return notFound();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-purple-50 pb-16">
@@ -42,10 +65,9 @@ export default function BlogDetailPage({ params }: { params: { slug: string } })
         <div className="relative">
           <div className="absolute left-0 top-8 bottom-8 w-1.5 bg-gradient-to-b from-blue-500 to-cyan-400 rounded-full hidden md:block" />
           <div className="bg-white rounded-3xl shadow-2xl p-4 md:p-12 space-y-20 relative z-10">
-            {blog.content.map((section, idx) => {
+            {blog.content.map((section: any, idx: number) => {
               const hasImage = !!section.image;
               const hasText = !!section.text;
-              const isEven = idx % 2 === 0;
               // If only image, make it centered and contained, not full width
               if (hasImage && !hasText) {
                 return (

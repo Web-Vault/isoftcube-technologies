@@ -1,22 +1,28 @@
-import mongoose, { Mongoose } from "mongoose";
+import mongoose from 'mongoose';
 
-const MONGODB_URI = process.env.MONGODB_URI as string;
+const MONGODB_URI = process.env.MONGODB_URI;
 
 if (!MONGODB_URI) {
-  throw new Error("Please define the MONGODB_URI environment variable in .env.local");
+  throw new Error('Please define the MONGODB_URI environment variable in .env.local');
 }
 
-// Use a module-scoped variable instead of global
-let cachedConn: Mongoose | null = null;
-let cachedPromise: Promise<Mongoose> | null = null;
+let cached = (global as any).mongoose;
 
-export async function connectToDatabase(): Promise<Mongoose> {
-  if (cachedConn) {
-    return cachedConn;
+if (!cached) {
+  cached = (global as any).mongoose = { conn: null, promise: null };
+}
+
+export async function connectToDatabase() {
+  if (cached.conn) {
+    return cached.conn;
   }
-  if (!cachedPromise) {
-    cachedPromise = mongoose.connect(MONGODB_URI);
+  if (!cached.promise) {
+    cached.promise = mongoose.connect(MONGODB_URI as string, {
+      bufferCommands: false,
+    }).then((mongoose) => {
+      return mongoose;
+    });
   }
-  cachedConn = await cachedPromise;
-  return cachedConn;
+  cached.conn = await cached.promise;
+  return cached.conn;
 }
