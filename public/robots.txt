@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://isoftcube-technologies.onrender.com/
+
+# Sitemaps
+Sitemap: https://isoftcube-technologies.onrender.com/sitemap.xml
