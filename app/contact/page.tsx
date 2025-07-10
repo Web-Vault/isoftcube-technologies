@@ -168,7 +168,60 @@ export default function ContactPage() {
         <meta name="theme-color" content="#1e293b" />
         <meta name="msapplication-TileColor" content="#1e293b" />
       </Head>
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-purple-50">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "Isoftcube Technologies",
+            "url": "https://isoftcube-technologies.onrender.com/",
+            "logo": "https://isoftcube-technologies.onrender.com/favicon-96x96-1.png",
+            "contactPoint": [{
+              "@type": "ContactPoint",
+              "telephone": "+91-9998833373",
+              "email": "info@isoftcubetechnologies.com",
+              "contactType": "customer support",
+              "areaServed": "IN",
+              "availableLanguage": ["English", "Hindi"]
+            }],
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "717, Shivalik Satyamev, Nr. Vakil Saheb Bridge, S.P. Ring Road, South Bopal, Bopal",
+              "addressLocality": "Ahmedabad",
+              "addressRegion": "Gujarat",
+              "postalCode": "380058",
+              "addressCountry": "IN"
+            },
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": 23.0262791,
+              "longitude": 72.475893
+            },
+            "description": "Contact Isoftcube Technologies for web, app, cloud, and digital solutions. Get in touch for project inquiries, support, or partnership opportunities. We're here to help you transform your business.",
+            "openingHoursSpecification": [
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": [
+                  "Monday",
+                  "Tuesday",
+                  "Wednesday",
+                  "Thursday",
+                  "Friday"
+                ],
+                "opens": "09:00",
+                "closes": "18:00"
+              }
+            ],
+            "sameAs": [
+              "https://www.linkedin.com/company/isoftcube-technologies/",
+              "https://twitter.com/isoftcube",
+              "https://www.facebook.com/isoftcube/"
+            ]
+          })
+        }}
+      />
+      <main className="min-h-screen bg-gradient-to-br from-slate-50 to-purple-50">
         {/* Hero Section */}
         <section className="bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 text-white py-30 md:py-36">
           <div className="container mx-auto px-6">
@@ -336,7 +389,7 @@ export default function ContactPage() {
             </div>
           </div>
         </div>
-      </div>
+      </main>
     </>
   )
 }

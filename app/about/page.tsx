@@ -85,6 +85,51 @@ export default function AboutPage() {
         <meta name="theme-color" content="#1e293b" />
         <meta name="msapplication-TileColor" content="#1e293b" />
       </Head>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": siteName || 'Isoftcube Technologies',
+            "url": "https://isoftcube-technologies.onrender.com/about",
+            "logo": "https://isoftcube-technologies.onrender.com/favicon-96x96-1.png",
+            "description": pageDescription,
+            "foundingDate": "2015-01-01",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "717, Shivalik Satyamev, Nr. Vakil Saheb Bridge, S.P. Ring Road, South Bopal, Bopal",
+              "addressLocality": "Ahmedabad",
+              "addressRegion": "Gujarat",
+              "postalCode": "380058",
+              "addressCountry": "IN"
+            },
+            "member": about.teamMembers ? about.teamMembers.map((member: any) => ({
+              "@type": "Person",
+              "name": member.name,
+              "jobTitle": member.role,
+              "description": member.bio,
+              "image": member.image ? member.image : undefined
+            })) : undefined,
+            "sameAs": [
+              "https://www.linkedin.com/company/isoftcube-technologies/",
+              "https://twitter.com/isoftcube",
+              "https://www.facebook.com/isoftcube/"
+            ],
+            "contactPoint": [{
+              "@type": "ContactPoint",
+              "telephone": "+91-9998833373",
+              "contactType": "customer support",
+              "areaServed": "IN",
+              "availableLanguage": ["English", "Hindi"]
+            }],
+            "numberOfEmployees": 2-10,
+            "founder": [
+              { "@type": "Person", "name": "Bhavesh Kumbhani" }
+            ],
+          })
+        }}
+      />
       <div className="min-h-screen">
         {/* Hero Section */}
         <section className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white py-[100px]">

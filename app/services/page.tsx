@@ -66,7 +66,26 @@ export default function ServicesPage() {
         <meta name="theme-color" content="#1e293b" />
         <meta name="msapplication-TileColor" content="#1e293b" />
       </Head>
-      <div className="min-h-screen bg-white dark:bg-slate-950">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            "name": "Services at Isoftcube Technologies",
+            "description": "Explore the full range of digital, web, app, cloud, and IT services offered by Isoftcube Technologies.",
+            "url": "https://isoftcube-technologies.onrender.com/services",
+            "itemListElement": services.map((service, index) => ({
+              "@type": "ListItem",
+              "position": index + 1,
+              "url": `https://isoftcube-technologies.onrender.com/services/${service.slug}`,
+              "name": service.title,
+              "description": service.shortDescription || service.description || undefined
+            }))
+          })
+        }}
+      />
+      <main className="min-h-screen bg-white dark:bg-slate-950">
         {/* Themed Header */}
         <header className="relative w-full bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 py-24 px-4 flex flex-col items-center justify-center text-center overflow-hidden">
           {/* Subtle grid pattern */}
@@ -195,7 +214,7 @@ export default function ServicesPage() {
             </div>
           </div>
         </section>
-      </div>
+      </main>
     </>
   );
 }

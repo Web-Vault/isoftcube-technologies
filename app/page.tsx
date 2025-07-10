@@ -228,8 +228,64 @@ export default function HomePage() {
         {/* Theme color */}
         <meta name="theme-color" content="#1e293b" />
         <meta name="msapplication-TileColor" content="#1e293b" />
+        {/* JSON-LD Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "Isoftcube Technologies",
+              "alternateName": "Isoftcube",
+              "url": "https://isoftcube-technologies.onrender.com/",
+              "logo": "https://isoftcube-technologies.onrender.com/favicon-96x96-1.png",
+              "sameAs": [
+                "https://www.linkedin.com/company/isoftcube-technologies/",
+                "https://twitter.com/isoftcube",
+                "https://www.facebook.com/isoftcube/"
+              ],
+              "foundingDate": "2015-01-01",
+              "founders": [
+                { "@type": "Person", "name": "Bhavesh Kumbhani" },
+              ],
+              "numberOfEmployees": 2-10,
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "717, Shivalik Satyamev, Nr. Vakil Saheb Bridge, S.P. Ring Road, South Bopal, Bopal",
+                "addressLocality": "Ahmedabad",
+                "addressRegion": "Gujarat",
+               "postalCode": "380058",
+               "addressCountry": "IN"
+              },
+              "contactPoint": [{
+                "@type": "ContactPoint",
+                "telephone": "+91-9998833373",
+                "contactType": "customer support",
+                "areaServed": "IN",
+                "availableLanguage": ["English", "Hindi"]
+              }],
+              "description": "Isoftcube Technologies builds digital excellence through innovative web and mobile solutions. Transform your ideas into powerful products with our expert team."
+            })
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "url": "https://isoftcube-technologies.onrender.com/",
+              "name": "Isoftcube Technologies",
+              "potentialAction": {
+                "@type": "SearchAction",
+                "target": "https://isoftcube-technologies.onrender.com/search?q={search_term_string}",
+                "query-input": "required name=search_term_string"
+              }
+            })
+          }}
+        />
       </Head>
-      <div className="flex flex-col min-h-screen overflow-hidden">
+      <main className="flex flex-col min-h-screen overflow-hidden">
         {/* Hero Section with Professional Touch */}
         <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900">
           {/* Subtle Animated Background */}
@@ -559,7 +615,7 @@ export default function HomePage() {
             </div>
           </div>
         </section>
-      </div>
+      </main>
     </>
   )
 }

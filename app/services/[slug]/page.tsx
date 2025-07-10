@@ -95,9 +95,27 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
         <meta name="theme-color" content="#1e293b" />
         <meta name="msapplication-TileColor" content="#1e293b" />
       </Head>
-      <div className="min-h-screen bg-white">
-        {/* Simplified Header */}
-        <div className="bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 pt-10 text-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": service.title,
+            "description": service.shortDescription || service.fullDescription || undefined,
+            "provider": {
+              "@type": "Organization",
+              "name": "Isoftcube Technologies",
+              "url": "https://isoftcube-technologies.onrender.com/"
+            },
+            "serviceType": service.title,
+            "url": `https://isoftcube-technologies.onrender.com/services/${service.slug}`,
+          })
+        }}
+      />
+      <main className="min-h-screen bg-white">
+        {/* Service Header */}
+        <header className="bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 pt-10 text-white">
           <div className="container mx-auto px-6 py-16">
             <Link href="/services" className="inline-flex items-center text-blue-100 hover:text-white mb-8 transition-colors">
               <ArrowLeft className="mr-2 h-4 w-4" />
@@ -113,12 +131,12 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
               </div>
             </div>
           </div>
-        </div>
+        </header>
 
         <div className="container mx-auto px-6 py-16">
           <div className="grid lg:grid-cols-3 gap-12">
             {/* Main Content */}
-            <div className="lg:col-span-2 space-y-8">
+            <section className="lg:col-span-2 space-y-8">
               {/* Service Overview */}
               <Card>
                 <CardHeader>
@@ -226,10 +244,10 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
                   </div>
                 </CardContent>
               </Card>
-            </div>
+            </section>
 
             {/* Sidebar */}
-            <div className="space-y-6">
+            <aside className="space-y-6">
               {/* CTA Card */}
               <Card className="bg-gradient-to-br from-blue-600 to-purple-600 text-white">
                 <CardHeader>
@@ -300,10 +318,10 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
                   </div>
                 </CardContent>
               </Card>
-            </div>
+            </aside>
           </div>
         </div>
-      </div>
+      </main>
     </>
   )
 }

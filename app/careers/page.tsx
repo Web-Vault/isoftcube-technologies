@@ -172,7 +172,55 @@ export default function CareersPage() {
         <meta name="theme-color" content="#1e293b" />
         <meta name="msapplication-TileColor" content="#1e293b" />
       </Head>
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 overflow-hidden">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "Isoftcube Technologies",
+            "url": "https://isoftcube-technologies.onrender.com/",
+            "logo": "https://isoftcube-technologies.onrender.com/favicon-96x96-1.png",
+            "hiringOrganization": {
+              "@type": "Organization",
+              "name": "Isoftcube Technologies",
+              "sameAs": [
+                "https://www.linkedin.com/company/isoftcube-technologies/",
+                "https://twitter.com/isoftcube",
+                "https://www.facebook.com/isoftcube/"
+              ]
+            },
+            "jobPostings": jobs.map((job) => ({
+              "@type": "JobPosting",
+              "title": job.title,
+              "description": job.description,
+              "datePosted": job.postedDate,
+              "employmentType": job.type,
+              "hiringOrganization": {
+                "@type": "Organization",
+                "name": "Isoftcube Technologies",
+                "sameAs": [
+                  "https://www.linkedin.com/company/isoftcube-technologies/",
+                  "https://twitter.com/isoftcube",
+                  "https://www.facebook.com/isoftcube/"
+                ]
+              },
+              "jobLocation": {
+                "@type": "Place",
+                "address": {
+                  "@type": "PostalAddress",
+                  "streetAddress": "717, Shivalik Satyamev, Nr. Vakil Saheb Bridge, S.P. Ring Road, South Bopal, Bopal",
+                  "addressLocality": "Ahmedabad",
+                  "addressRegion": "Gujarat",
+                  "postalCode": "380058",
+                  "addressCountry": "IN"
+                }
+              },
+            }))
+          })
+        }}
+      />
+      <main className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 overflow-hidden">
         {/* Hero Section with Professional Touch */}
         <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 overflow-hidden">
           {/* Subtle Animated Background */}
@@ -517,7 +565,7 @@ export default function CareersPage() {
             setSelectedJob(null)
           }}
         />
-      </div>
+      </main>
     </>
   )
 }

@@ -60,6 +60,30 @@ export default function BlogsPage() {
         <meta name="theme-color" content="#1e293b" />
         <meta name="msapplication-TileColor" content="#1e293b" />
       </Head>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Blog",
+            "name": "Isoftcube Technologies Blog",
+            "url": "https://isoftcube-technologies.onrender.com/blogs",
+            "description": "Read the latest insights, stories, and technology articles from Isoftcube Technologies. Stay updated on web, app, cloud, and digital innovation trends.",
+            "blogPost": blogs.map((blog, idx) => ({
+              "@type": "BlogPosting",
+              "headline": blog.title,
+              "description": blog.summary,
+              "author": {
+                "@type": "Person",
+                "name": blog.author
+              },
+              "datePublished": blog.createdAt,
+              "url": `https://isoftcube-technologies.onrender.com/blogs/${blog.slug}`,
+              "image": blog.image || `https://isoftcube-technologies.onrender.com/og-image.jpg`
+            }))
+          })
+        }}
+      />
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-purple-50 pb-20">
         {/* Hero Section */}
         <section className="relative bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 text-white min-h-[400px] md:min-h-[500px] flex items-center justify-center mb-16">
