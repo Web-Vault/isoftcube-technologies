@@ -27,7 +27,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon-96x96-1.png" />
+        <meta name="google-site-verification" content="RVb0tdqlJUDgf_poJPCVS6pWfJ36LW7ZlyyImYcXs9A" />
       </head>
       <body className={inter.className}>
         <Navbar />
