@@ -59,7 +59,7 @@ export default function Navbar() {
     >
       <div className="container flex h-20 items-center justify-between px-6">
         {/* Logo */}
-        <Link href="/" className="flex items-center space-x-3 group">
+        <Link href="/" className="flex items-center space-x-3 group" aria-label="Home">
           <div className="relative">
             <img
               src={siteConfig?.logoUrl || fallbackLogo}
@@ -88,6 +88,7 @@ export default function Navbar() {
             className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:bg-white/10 ${
               isScrolled ? "text-gray-700 hover:text-blue-600 hover:bg-blue-50" : "text-white hover:text-blue-200"
             }`}
+            aria-label="Home"
           >
             Home
           </Link>
@@ -148,6 +149,7 @@ export default function Navbar() {
               className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:bg-white/10 ${
                 isScrolled ? "text-gray-700 hover:text-blue-600 hover:bg-blue-50" : "text-white hover:text-blue-200"
               }`}
+              aria-label={item}
             >
               {item}
             </Link>
@@ -186,6 +188,7 @@ export default function Navbar() {
                   ? "text-gray-700 hover:text-blue-600 hover:bg-blue-50"
                   : "text-white hover:text-blue-200 hover:bg-white/10"
               }`}
+              aria-label="Open mobile menu"
             >
               <Menu className="h-6 w-6" />
             </Button>
@@ -198,6 +201,7 @@ export default function Navbar() {
                 href="/"
                 className="text-lg font-semibold text-gray-900 hover:text-blue-600 transition-colors duration-200 p-2 rounded-lg hover:bg-blue-50"
                 onClick={() => setIsOpen(false)}
+                aria-label="Home"
               >
                 Home
               </Link>
@@ -228,6 +232,7 @@ export default function Navbar() {
                   href={`/${item.toLowerCase()}`}
                   className="text-lg font-semibold text-gray-900 hover:text-blue-600 transition-colors duration-200 p-2 rounded-lg hover:bg-blue-50"
                   onClick={() => setIsOpen(false)}
+                  aria-label={item}
                 >
                   {item}
                 </Link>

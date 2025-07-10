@@ -157,8 +157,9 @@ export default function ServicesPage() {
                     <Button
                       variant="ghost"
                       className="group/btn px-0 h-auto text-left hover:bg-transparent font-medium"
+                      aria-label={`Learn more about ${service.title}`}
                     >
-                      <span className="text-blue-600 group-hover:text-purple-600 transition-colors">Learn More</span>
+                      <span className="text-blue-600 group-hover:text-purple-600 transition-colors">Learn more about {service.title}</span>
                       <ArrowRight className="h-4 w-4 text-blue-600 group-hover/btn:text-purple-600 group-hover/btn:translate-x-1 transition-all ml-1" />
                     </Button>
                   </Link>

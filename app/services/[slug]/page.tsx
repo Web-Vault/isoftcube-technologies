@@ -117,7 +117,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
         {/* Service Header */}
         <header className="bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 pt-10 text-white">
           <div className="container mx-auto px-6 py-16">
-            <Link href="/services" className="inline-flex items-center text-blue-100 hover:text-white mb-8 transition-colors">
+            <Link href="/services" className="inline-flex items-center text-blue-100 hover:text-white mb-8 transition-colors" aria-label="Back to Services">
               <ArrowLeft className="mr-2 h-4 w-4" />
               Back to Services
             </Link>
@@ -209,8 +209,8 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
 
                           <div className="flex justify-end">
                             <Link href="/contact">
-                              <Button variant="outline" size="sm">
-                                Learn More
+                              <Button variant="outline" size="sm" aria-label={`Learn more about ${subService.name}`}>
+                                Learn more about {subService.name}
                                 <ArrowRight className="ml-2 h-4 w-4" />
                               </Button>
                             </Link>

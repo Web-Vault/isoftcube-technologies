@@ -42,22 +42,22 @@ export default function Footer() {
             </p>
             <div className="flex space-x-4">
               {siteConfig?.socialLinks?.facebook && (
-                <a href={siteConfig.socialLinks.facebook} target="_blank" rel="noopener noreferrer">
+                <a href={siteConfig.socialLinks.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                   <Facebook className="h-5 w-5 text-gray-400 hover:text-white cursor-pointer transition-colors" />
                 </a>
               )}
               {siteConfig?.socialLinks?.twitter && (
-                <a href={siteConfig.socialLinks.twitter} target="_blank" rel="noopener noreferrer">
+                <a href={siteConfig.socialLinks.twitter} target="_blank" rel="noopener noreferrer" aria-label="Twitter">
                   <Twitter className="h-5 w-5 text-gray-400 hover:text-white cursor-pointer transition-colors" />
                 </a>
               )}
               {siteConfig?.socialLinks?.linkedin && (
-                <a href={siteConfig.socialLinks.linkedin} target="_blank" rel="noopener noreferrer">
+                <a href={siteConfig.socialLinks.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                   <Linkedin className="h-5 w-5 text-gray-400 hover:text-white cursor-pointer transition-colors" />
                 </a>
               )}
               {siteConfig?.socialLinks?.Instagram && (
-                <a href={siteConfig.socialLinks.Instagram} target="_blank" rel="noopener noreferrer">
+                <a href={siteConfig.socialLinks.Instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                   <Instagram className="h-5 w-5 text-gray-400 hover:text-white cursor-pointer transition-colors" />
                 </a>
               )}
@@ -71,7 +71,7 @@ export default function Footer() {
               {services.length > 0 ? (
                 services.slice(0, 6).map((service: any) => (
                   <li key={service.slug}>
-                    <Link href={`/services/${service.slug}`} className="text-gray-300 hover:text-white transition-colors">
+                    <Link href={`/services/${service.slug}`} className="text-gray-300 hover:text-white transition-colors" aria-label={`Go to ${service.title} service page`}>
                       {service.title}
                     </Link>
                   </li>
@@ -87,32 +87,32 @@ export default function Footer() {
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/" className="text-gray-300 hover:text-white transition-colors">
+                <Link href="/" className="text-gray-300 hover:text-white transition-colors" aria-label="Home">
                   Home
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="text-gray-300 hover:text-white transition-colors">
+                <Link href="/about" className="text-gray-300 hover:text-white transition-colors" aria-label="About">
                   About Us
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-gray-300 hover:text-white transition-colors">
+                <Link href="/contact" className="text-gray-300 hover:text-white transition-colors" aria-label="Contact">
                   Contact
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-gray-300 hover:text-white transition-colors">
+                <Link href="#" className="text-gray-300 hover:text-white transition-colors" aria-label="Other Link">
                   Portfolio
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-gray-300 hover:text-white transition-colors">
+                <Link href="#" className="text-gray-300 hover:text-white transition-colors" aria-label="Other Link">
                   Blog
                 </Link>
               </li>
               <li>
-                <Link href="/careers" className="text-gray-300 hover:text-white transition-colors">
+                <Link href="/careers" className="text-gray-300 hover:text-white transition-colors" aria-label="Careers">
                   Careers
                 </Link>
               </li>
@@ -167,13 +167,13 @@ export default function Footer() {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-400 text-sm">© 2025 {siteConfig?.siteName || 'Company'}. All rights reserved.</p>
             <div className="flex space-x-6 mt-4 md:mt-0">
-              <Link href="#" className="text-gray-400 hover:text-white text-sm transition-colors">
+              <Link href="#" className="text-gray-400 hover:text-white text-sm transition-colors" aria-label="Other Link">
                 Privacy Policy
               </Link>
-              <Link href="#" className="text-gray-400 hover:text-white text-sm transition-colors">
+              <Link href="#" className="text-gray-400 hover:text-white text-sm transition-colors" aria-label="Other Link">
                 Terms of Service
               </Link>
-              <Link href="#" className="text-gray-400 hover:text-white text-sm transition-colors">
+              <Link href="#" className="text-gray-400 hover:text-white text-sm transition-colors" aria-label="Other Link">
                 Cookie Policy
               </Link>
             </div>

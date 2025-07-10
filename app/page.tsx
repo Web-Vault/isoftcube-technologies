@@ -106,7 +106,7 @@ export default function HomePage() {
             <button
               onClick={prev}
               className="absolute -left-8 top-1/2 -translate-y-1/2 z-20 rounded-full bg-white/60 backdrop-blur shadow-lg border border-blue-100 hover:bg-blue-100 p-3 transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-blue-400"
-              aria-label="Previous review"
+              aria-label="Go to previous review"
               style={{ boxShadow: '0 4px 24px 0 rgba(59,130,246,0.10)' }}
             >
               <ArrowRight className="rotate-180 text-blue-600 w-6 h-6" />
@@ -114,7 +114,7 @@ export default function HomePage() {
             <button 
               onClick={next}
               className="absolute -right-8 top-1/2 -translate-y-1/2 z-20 rounded-full bg-white/60 backdrop-blur shadow-lg border border-blue-100 hover:bg-blue-100 p-3 transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-blue-400"
-              aria-label="Next review"
+              aria-label="Go to next review"
               style={{ boxShadow: '0 4px 24px 0 rgba(168,85,247,0.10)' }}
             >
               <ArrowRight className="text-blue-600 w-6 h-6" />
@@ -330,6 +330,7 @@ export default function HomePage() {
                   <Button
                     size="lg"
                     className="group relative overflow-hidden bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 px-8 py-4 text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-2xl"
+                    aria-label="Start your project with Isoftcube Technologies"
                   >
                     <span className="relative z-10 flex items-center">
                       Start Your Project
@@ -343,9 +344,10 @@ export default function HomePage() {
                     variant="outline"
                     size="lg"
                     className="group border-2 border-white/30 text-white hover:bg-white hover:text-slate-900 px-8 py-4 text-lg font-semibold backdrop-blur-sm transition-all duration-300 transform hover:scale-105 bg-transparent"
+                    aria-label="Learn more about Isoftcube Technologies"
                   >
                     <Play className="mr-2 h-5 w-5" />
-                    Learn More
+                    Learn more about Isoftcube Technologies
                   </Button>
                 </Link>
               </div>
@@ -441,8 +443,9 @@ export default function HomePage() {
                         <Button
                           variant="ghost"
                           className="group/btn w-full justify-between p-0 h-auto text-left hover:bg-transparent font-medium"
+                          aria-label={`Learn more about ${service.title}`}
                         >
-                          <span className="text-blue-600 group-hover:text-purple-600 transition-colors">Learn More</span>
+                          <span className="text-blue-600 group-hover:text-purple-600 transition-colors">Learn more about {service.title}</span>
                           <ArrowRight className="h-4 w-4 text-blue-600 group-hover/btn:text-purple-600 group-hover/btn:translate-x-1 transition-all" />
                         </Button>
                       </Link>
