@@ -11,6 +11,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import "leaflet/dist/leaflet.css"
 import dynamic from "next/dynamic"
+import Head from 'next/head';
 
 // Dynamically import MapContainer and related components with SSR disabled
 const MapContainer = dynamic(
@@ -135,174 +136,207 @@ export default function ContactPage() {
   ] : []
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-purple-50">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 text-white py-30 md:py-36">
-        <div className="container mx-auto px-6">
-          <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-5xl md:text-6xl font-black mb-10 leading-tight">
-              Get In Touch With <br />
-              <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
-                iSoftcube Technologies
-              </span>
-            </h1>
-            <p className="text-2xl md:text-3xl text-blue-100 leading-relaxed max-w-2xl mx-auto">
-              Ready to start your next project? We'd love to hear from you. Let's discuss how we can help transform your business.
-            </p>
+    <>
+      <Head>
+        <title>Contact Us | Isoftcube Technologies - Get in Touch</title>
+        <meta name="description" content="Contact Isoftcube Technologies for web, app, cloud, and digital solutions. Get in touch for project inquiries, support, or partnership opportunities. We're here to help you transform your business." />
+        <meta name="keywords" content="Isoftcube, contact, get in touch, inquiry, support, web development, app development, cloud solutions, IT services, digital transformation, technology, software company" />
+        <meta name="author" content="Isoftcube Technologies" />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://isoftcube.com/contact" />
+        <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Contact Us | Isoftcube Technologies - Get in Touch" />
+        <meta property="og:description" content="Contact Isoftcube Technologies for web, app, cloud, and digital solutions. Get in touch for project inquiries, support, or partnership opportunities. We're here to help you transform your business." />
+        <meta property="og:url" content="https://isoftcube.com/contact" />
+        <meta property="og:image" content="https://isoftcube.com/og-image.jpg" />
+        <meta property="og:site_name" content="Isoftcube Technologies" />
+        <meta property="og:locale" content="en_US" />
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Contact Us | Isoftcube Technologies - Get in Touch" />
+        <meta name="twitter:description" content="Contact Isoftcube Technologies for web, app, cloud, and digital solutions. Get in touch for project inquiries, support, or partnership opportunities. We're here to help you transform your business." />
+        <meta name="twitter:image" content="https://isoftcube.com/og-image.jpg" />
+        <meta name="twitter:site" content="@isoftcube" />
+        <meta name="twitter:creator" content="@isoftcube" />
+        {/* Favicon */}
+        <link rel="icon" href="/favicon-96x96-1.png" />
+        <link rel="manifest" href="/site.webmanifest" />
+        {/* Theme color */}
+        <meta name="theme-color" content="#1e293b" />
+        <meta name="msapplication-TileColor" content="#1e293b" />
+      </Head>
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-purple-50">
+        {/* Hero Section */}
+        <section className="bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 text-white py-30 md:py-36">
+          <div className="container mx-auto px-6">
+            <div className="max-w-3xl mx-auto text-center">
+              <h1 className="text-5xl md:text-6xl font-black mb-10 leading-tight">
+                Get In Touch With <br />
+                <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
+                  iSoftcube Technologies
+                </span>
+              </h1>
+              <p className="text-2xl md:text-3xl text-blue-100 leading-relaxed max-w-2xl mx-auto">
+                Ready to start your next project? We'd love to hear from you. Let's discuss how we can help transform your business.
+              </p>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <div className="container mx-auto px-6 py-16">
-        <div className="grid lg:grid-cols-3 gap-12">
-          {/* Contact Form */}
-          <div className="lg:col-span-2">
-            <Card className="border-0 shadow-xl">
-              <CardHeader>
-                <CardTitle className="text-2xl">Send us a message</CardTitle>
-                <CardDescription>Fill out the form below and we'll get back to you within 24 hours.</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  {submitSuccess && (
-                    <div className="p-3 rounded bg-green-100 text-green-800 text-center">{submitSuccess}</div>
-                  )}
-                  {submitError && (
-                    <div className="p-3 rounded bg-red-100 text-red-800 text-center">{submitError}</div>
-                  )}
-                  <div className="grid md:grid-cols-2 gap-6">
+        <div className="container mx-auto px-6 py-16">
+          <div className="grid lg:grid-cols-3 gap-12">
+            {/* Contact Form */}
+            <div className="lg:col-span-2">
+              <Card className="border-0 shadow-xl">
+                <CardHeader>
+                  <CardTitle className="text-2xl">Send us a message</CardTitle>
+                  <CardDescription>Fill out the form below and we'll get back to you within 24 hours.</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <form onSubmit={handleSubmit} className="space-y-6">
+                    {submitSuccess && (
+                      <div className="p-3 rounded bg-green-100 text-green-800 text-center">{submitSuccess}</div>
+                    )}
+                    {submitError && (
+                      <div className="p-3 rounded bg-red-100 text-red-800 text-center">{submitError}</div>
+                    )}
+                    <div className="grid md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <Label htmlFor="name">Full Name *</Label>
+                        <Input
+                          id="name"
+                          value={formData.name}
+                          onChange={(e) => handleChange("name", e.target.value)}
+                          required
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="email">Email Address *</Label>
+                        <Input
+                          id="email"
+                          type="email"
+                          value={formData.email}
+                          onChange={(e) => handleChange("email", e.target.value)}
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <Label htmlFor="company">Company Name</Label>
+                        <Input
+                          id="company"
+                          value={formData.company}
+                          onChange={(e) => handleChange("company", e.target.value)}
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="service">Service Interested In</Label>
+                        <Select onValueChange={(value) => handleChange("service", value)}>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select a service" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="web-development">Web Development</SelectItem>
+                            <SelectItem value="app-development">App Development</SelectItem>
+                            <SelectItem value="iot-solutions">IoT Solutions</SelectItem>
+                            <SelectItem value="cloud-services">Cloud Services</SelectItem>
+                            <SelectItem value="cybersecurity">Cybersecurity</SelectItem>
+                            <SelectItem value="digital-transformation">Digital Transformation</SelectItem>
+                            <SelectItem value="other">Other</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+
                     <div className="space-y-2">
-                      <Label htmlFor="name">Full Name *</Label>
-                      <Input
-                        id="name"
-                        value={formData.name}
-                        onChange={(e) => handleChange("name", e.target.value)}
+                      <Label htmlFor="message">Message *</Label>
+                      <Textarea
+                        id="message"
+                        rows={6}
+                        value={formData.message}
+                        onChange={(e) => handleChange("message", e.target.value)}
+                        placeholder="Tell us about your project requirements..."
                         required
                       />
                     </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="email">Email Address *</Label>
-                      <Input
-                        id="email"
-                        type="email"
-                        value={formData.email}
-                        onChange={(e) => handleChange("email", e.target.value)}
-                        required
-                      />
-                    </div>
-                  </div>
 
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <Label htmlFor="company">Company Name</Label>
-                      <Input
-                        id="company"
-                        value={formData.company}
-                        onChange={(e) => handleChange("company", e.target.value)}
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="service">Service Interested In</Label>
-                      <Select onValueChange={(value) => handleChange("service", value)}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select a service" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="web-development">Web Development</SelectItem>
-                          <SelectItem value="app-development">App Development</SelectItem>
-                          <SelectItem value="iot-solutions">IoT Solutions</SelectItem>
-                          <SelectItem value="cloud-services">Cloud Services</SelectItem>
-                          <SelectItem value="cybersecurity">Cybersecurity</SelectItem>
-                          <SelectItem value="digital-transformation">Digital Transformation</SelectItem>
-                          <SelectItem value="other">Other</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </div>
+                    <Button
+                      type="submit"
+                      size="lg"
+                      className="w-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700"
+                      disabled={submitting}
+                    >
+                      {submitting ? 'Sending...' : 'Send Message'}
+                    </Button>
+                  </form>
+                </CardContent>
+              </Card>
+            
+              <div className="relative w-full rounded-xl overflow-hidden shadow-lg mt-8" style={{ zIndex: 1 }}>
+                <MapContainer
+                  center={position}
+                  zoom={15}
+                  scrollWheelZoom={false}
+                  style={{ height: 350, width: "100%" }}
+                >
+                  <TileLayer
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                  />
+                  <Marker position={position}>
+                    <Popup>We are Here <br />717-Shivalik Satyamev</Popup>
+                  </Marker>
+                </MapContainer>
+              </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="message">Message *</Label>
-                    <Textarea
-                      id="message"
-                      rows={6}
-                      value={formData.message}
-                      onChange={(e) => handleChange("message", e.target.value)}
-                      placeholder="Tell us about your project requirements..."
-                      required
-                    />
-                  </div>
-
-                  <Button
-                    type="submit"
-                    size="lg"
-                    className="w-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700"
-                    disabled={submitting}
-                  >
-                    {submitting ? 'Sending...' : 'Send Message'}
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
-          
-            <div className="relative w-full rounded-xl overflow-hidden shadow-lg mt-8" style={{ zIndex: 1 }}>
-              <MapContainer
-                center={position}
-                zoom={15}
-                scrollWheelZoom={false}
-                style={{ height: 350, width: "100%" }}
-              >
-                <TileLayer
-                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
-                <Marker position={position}>
-                  <Popup>We are Here <br />717-Shivalik Satyamev</Popup>
-                </Marker>
-              </MapContainer>
             </div>
 
-          </div>
+            
 
-          
-
-          {/* Contact Information */}
-          <div className="space-y-6">
-            <Card className="border-0 shadow-xl">
-              <CardHeader>
-                <CardTitle>Contact Information</CardTitle>
-                <CardDescription>Get in touch with us through any of these channels</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                {loading && <p>Loading contact info...</p>}
-                {error && <p className="text-red-500">{error}</p>}
-                {!loading && !error && contactInfo.map((info, idx) => (
-                  <div className="flex items-start gap-4" key={info.title}>
-                    <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-blue-600 to-cyan-600 flex items-center justify-center flex-shrink-0">
-                      <info.icon className="h-5 w-5 text-white" />
+            {/* Contact Information */}
+            <div className="space-y-6">
+              <Card className="border-0 shadow-xl">
+                <CardHeader>
+                  <CardTitle>Contact Information</CardTitle>
+                  <CardDescription>Get in touch with us through any of these channels</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  {loading && <p>Loading contact info...</p>}
+                  {error && <p className="text-red-500">{error}</p>}
+                  {!loading && !error && contactInfo.map((info, idx) => (
+                    <div className="flex items-start gap-4" key={info.title}>
+                      <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-blue-600 to-cyan-600 flex items-center justify-center flex-shrink-0">
+                        <info.icon className="h-5 w-5 text-white" />
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-gray-900">{info.title}</h4>
+                        {info.details.map((line: string, i: number) => (
+                          <p className="text-gray-600" key={i}>{line}</p>
+                        ))}
+                      </div>
                     </div>
-                    <div>
-                      <h4 className="font-semibold text-gray-900">{info.title}</h4>
-                      {info.details.map((line: string, i: number) => (
-                        <p className="text-gray-600" key={i}>{line}</p>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </CardContent>
-            </Card>
+                  ))}
+                </CardContent>
+              </Card>
 
-            <Card className="border-0 shadow-xl bg-gradient-to-br from-blue-600 to-cyan-600 text-white">
-              <CardHeader>
-                <CardTitle className="text-white">Need Immediate Help?</CardTitle>
-                <CardDescription className="text-blue-100">For urgent technical support or emergencies</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Button className="w-full bg-white text-blue-600 hover:bg-gray-100">Call Emergency Support</Button>
-                <p className="text-sm text-blue-100 mt-4 text-center">Available 24/7 for existing clients</p>
-              </CardContent>
-            </Card>
+              <Card className="border-0 shadow-xl bg-gradient-to-br from-blue-600 to-cyan-600 text-white">
+                <CardHeader>
+                  <CardTitle className="text-white">Need Immediate Help?</CardTitle>
+                  <CardDescription className="text-blue-100">For urgent technical support or emergencies</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <Button className="w-full bg-white text-blue-600 hover:bg-gray-100">Call Emergency Support</Button>
+                  <p className="text-sm text-blue-100 mt-4 text-center">Available 24/7 for existing clients</p>
+                </CardContent>
+              </Card>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
