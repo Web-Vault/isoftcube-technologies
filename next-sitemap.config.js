@@ -1,5 +1,5 @@
 /** @type {import('next-sitemap').IConfig} */
-module.exports = {
+const config = {
   siteUrl: 'https://isoftcube-technologies.onrender.com/', // Change to your actual domain
   generateRobotsTxt: true, // Generate robots.txt file
   sitemapSize: 7000, // Optional: split sitemaps if you have many URLs
@@ -8,4 +8,5 @@ module.exports = {
   exclude: ['/admin', '/secret-page'], // Optional: exclude specific routes
   // Optionally, you can add more advanced config here
 };
-      
+
+export default config;
