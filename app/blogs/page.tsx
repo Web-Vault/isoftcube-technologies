@@ -24,7 +24,7 @@ export default function BlogsPage() {
   }, []);
 
   if (loading) {
-    return <div className="min-h-screen flex items-center justify-center text-xl">Loading blogs...</div>;
+    return <div className="min-h-screen flex items-center justify-center text-xl bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white">Loading blogs...</div>;
   }
 
   return (

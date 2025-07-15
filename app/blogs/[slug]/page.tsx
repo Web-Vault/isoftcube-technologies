@@ -27,7 +27,7 @@ export default function BlogDetailPage({ params }: { params: { slug: string } })
   }, [params.slug]);
 
   if (loading) {
-    return <div className="min-h-screen flex items-center justify-center text-xl">Loading blog...</div>;
+    return <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white text-xl">Loading blog...</div>;
   }
   if (notFoundState || !blog) return notFound();
 

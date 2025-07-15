@@ -6,6 +6,7 @@ import { Menu, ChevronDown, ArrowRight, Code, Smartphone, Wifi, Cloud, Shield, Z
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { usePathname } from "next/navigation"
 
 const iconMap = {
   Code,
@@ -25,6 +26,9 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [services, setServices] = useState<any[]>([]);
   const [siteConfig, setSiteConfig] = useState<any>(null);
+  const pathname = usePathname();
+  const isServicesActive = pathname.startsWith('/services');
+  const isBlogsActive = pathname.startsWith('/blogs');
 
   const fallbackLogo = "/favicon-96x96-1.png";
   const fallbackName = "iSoftcube Technologies";
@@ -64,7 +68,7 @@ export default function Navbar() {
             <img
               src={siteConfig?.logoUrl || fallbackLogo}
               alt={siteConfig?.siteName || fallbackName}
-              className="h-10 w-10 rounded-xl group-hover:shadow-xl transition-all duration-300 transform group-hover:scale-110"
+              className="h-12 w-12 rounded-xl scale-110 transition-all duration-300 transform"
             />
           </div>
           <div className="flex flex-col">
@@ -85,21 +89,28 @@ export default function Navbar() {
         <nav className="hidden lg:flex items-center space-x-1">
           <Link
             href="/"
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:bg-white/10 ${
-              isScrolled ? "text-gray-700 hover:text-blue-600 hover:bg-blue-50" : "text-white hover:text-blue-200"
-            }`}
+            className={`group px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+                pathname === "/" ? "bg-white text-blue-600 font-bold shadow-sm" : isScrolled ? "text-gray-700" : "text-white" 
+            } ${pathname === "/" ? "z-10" : "bg-transparent"}`}
             aria-label="Home"
           >
-            Home
+            <span className="relative flex flex-col items-center">
+              <span className="transition-colors duration-200">Home</span>
+              <span className={`block h-0.5 rounded bg-gradient-to-r from-blue-600 to-purple-600 transition-all duration-300 origin-center
+                ${pathname === "/" ? "w-8 scale-x-100" : "w-8 scale-x-0 group-hover:scale-x-100"}`}></span>
+            </span>
           </Link>
 
           <DropdownMenu>
             <DropdownMenuTrigger
-              className={`flex items-center px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:bg-white/10 ${
-                isScrolled ? "text-gray-700 hover:text-blue-600 hover:bg-blue-50" : "text-white hover:text-blue-200"
-              }`}
+              className={`group flex items-center px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 overflow-hidden
+                ${isServicesActive ? "bg-white text-blue-600 font-bold shadow-sm z-10" : isScrolled ? "text-gray-700" : "text-white"}`}
             >
-              Services
+              <span className="relative flex flex-col items-center">
+                <span className="transition-colors duration-200">Services</span>
+                <span className={`block h-0.5 rounded bg-gradient-to-r from-blue-600 to-purple-600 transition-all duration-300 origin-center
+                  ${isServicesActive ? "w-8 scale-x-100" : "w-8 scale-x-0 group-hover:scale-x-100"}`}></span>
+              </span>
               <ChevronDown className="ml-1 h-4 w-4 transition-transform duration-200 group-data-[state=open]:rotate-180" />
             </DropdownMenuTrigger>
             <DropdownMenuContent
@@ -142,16 +153,22 @@ export default function Navbar() {
             </DropdownMenuContent>
           </DropdownMenu>
 
-          {["About", "Contact", "Careers", "Blogs"].map((item) => (
+          {[{ label: "About", href: "/about" }, { label: "Contact", href: "/contact" }, { label: "Careers", href: "/careers" }, { label: "Blogs", href: "/blogs" }].map((item) => (
             <Link
-              key={item}
-              href={`/${item.toLowerCase()}`}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:bg-white/10 ${
-                isScrolled ? "text-gray-700 hover:text-blue-600 hover:bg-blue-50" : "text-white hover:text-blue-200"
-              }`}
-              aria-label={item}
+              key={item.label}
+              href={item.href}
+              className={`group px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+                (item.label === "Blogs" && isBlogsActive) || (pathname === item.href && item.label !== "Blogs")
+                  ? "bg-white text-blue-600 font-bold shadow-sm z-10"
+                  : isScrolled ? "text-gray-700" : "text-white"
+              } ${(item.label === "Blogs" && isBlogsActive) || (pathname === item.href && item.label !== "Blogs") ? "z-10" : "bg-transparent"}`}
+              aria-label={item.label}
             >
-              {item}
+              <span className="relative flex flex-col items-center">
+                <span className="transition-colors duration-200">{item.label}</span>
+                <span className={`block h-0.5 rounded bg-gradient-to-r from-blue-600 to-purple-600 transition-all duration-300 origin-center
+                  ${(item.label === "Blogs" && isBlogsActive) || (pathname === item.href && item.label !== "Blogs") ? "w-8 scale-x-100" : "w-8 scale-x-0 group-hover:scale-x-100"}`}></span>
+              </span>
             </Link>
           ))}
         </nav>
@@ -199,11 +216,17 @@ export default function Navbar() {
             <div className="flex flex-col space-y-6 mt-8 overflow-y-auto" aria-labelledby="mobile-nav-title">
               <Link
                 href="/"
-                className="text-lg font-semibold text-gray-900 hover:text-blue-600 transition-colors duration-200 p-2 rounded-lg hover:bg-blue-50"
+                className={`group text-lg font-semibold p-2 rounded-lg transition-all duration-200 ${
+                    pathname === "/" ? "bg-white text-blue-600 font-bold shadow-sm" : "text-gray-900" 
+                } ${pathname === "/" ? "z-10" : "bg-transparent"}`}
                 onClick={() => setIsOpen(false)}
                 aria-label="Home"
               >
-                Home
+                <span className="relative flex flex-col items-center">
+                  <span className="transition-colors duration-200">Home</span>
+                  <span className={`block h-0.5 rounded bg-gradient-to-r from-blue-600 to-purple-600 transition-all duration-300 origin-center
+                    ${pathname === "/" ? "w-8 scale-x-100" : "w-8 scale-x-0 group-hover:scale-x-100"}`}></span>
+                </span>
               </Link>
 
               <div className="space-y-3">
@@ -226,15 +249,23 @@ export default function Navbar() {
                 </div>
               </div>
 
-              {["About", "Contact", "Careers", "Blogs"].map((item) => (
+              {[{ label: "About", href: "/about" }, { label: "Contact", href: "/contact" }, { label: "Careers", href: "/careers" }, { label: "Blogs", href: "/blogs" }].map((item) => (
                 <Link
-                  key={item}
-                  href={`/${item.toLowerCase()}`}
-                  className="text-lg font-semibold text-gray-900 hover:text-blue-600 transition-colors duration-200 p-2 rounded-lg hover:bg-blue-50"
+                  key={item.label}
+                  href={item.href}
+                  className={`group text-lg font-semibold p-2 rounded-lg transition-all duration-200 ${
+                    (item.label === "Blogs" && isBlogsActive) || (pathname === item.href && item.label !== "Blogs")
+                      ? "bg-white text-blue-600 font-bold shadow-sm z-10"
+                      : "text-gray-900"
+                  } ${(item.label === "Blogs" && isBlogsActive) || (pathname === item.href && item.label !== "Blogs") ? "z-10" : "bg-transparent"}`}
                   onClick={() => setIsOpen(false)}
-                  aria-label={item}
+                  aria-label={item.label}
                 >
-                  {item}
+                  <span className="relative flex flex-col items-center">
+                    <span className="transition-colors duration-200">{item.label}</span>
+                    <span className={`block h-0.5 rounded bg-gradient-to-r from-blue-600 to-purple-600 transition-all duration-300 origin-center
+                      ${(item.label === "Blogs" && isBlogsActive) || (pathname === item.href && item.label !== "Blogs") ? "w-8 scale-x-100" : "w-8 scale-x-0 group-hover:scale-x-100"}`}></span>
+                  </span>
                 </Link>
               ))}
 

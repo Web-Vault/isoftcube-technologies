@@ -49,7 +49,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
   }, [slug]);
 
   if (loading) {
-    return <div className="min-h-screen flex items-center justify-center text-xl text-gray-500">Loading...</div>;
+    return <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-xl text-white">Loading...</div>;
   }
   if (!service) {
     return <div className="min-h-screen flex items-center justify-center text-xl text-gray-500">Service not found</div>;

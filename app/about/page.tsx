@@ -39,7 +39,7 @@ export default function AboutPage() {
 
   if (loading || !about) {
     return (
-      <div className="min-h-screen flex items-center justify-center text-xl text-gray-500">Loading...</div>
+      <div className="min-h-screen flex items-center bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 justify-center text-xl text-white">Loading...</div>
     );
   }
 
