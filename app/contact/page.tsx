@@ -129,8 +129,6 @@ export default function ContactPage() {
       title: "Business Hours",
       details: [
         "Monday - Friday: 9:00 AM - 6:00 PM",
-        "Saturday: Closed",
-        "Sunday: Closed",
       ],
     },
   ] : []
@@ -223,7 +221,7 @@ export default function ContactPage() {
       />
       <main className="min-h-screen bg-gradient-to-br from-slate-50 to-purple-50">
         {/* Hero Section */}
-        <section className="bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 text-white py-36">
+        {/* <section className="bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 text-white py-36">
           <div className="container mx-auto px-6">
             <div className="max-w-3xl mx-auto text-center">
               <h1 className="text-5xl md:text-6xl font-black mb-10 leading-tight">
@@ -237,7 +235,66 @@ export default function ContactPage() {
               </p>
             </div>
           </div>
-        </section>
+        </section> */}
+
+
+<section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900">
+
+<div className="absolute inset-0 opacity-5">
+            <div
+              className="absolute inset-0"
+              style={{
+                backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px)`,
+                backgroundSize: "100px 100px",
+              }}
+            ></div>
+          </div>
+
+          <div className="relative z-10 mx-auto max-w-7xl px-6 text-center">
+            <div className="mt-14">
+
+              <div className="space-y-6">
+                <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight text-white leading-none">
+                  <span className="block">Get In Touch With</span>
+                  <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent text-wrap">
+                  iSoftcube Technologies
+                  </span>
+                </h1>
+                <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed font-light">
+                Ready to start your next project? We'd love to hear from you. Let's discuss how we can help transform your business.
+                </p>
+              </div>
+
+              {/* <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-8">
+                <Link href="/contact">
+                  <Button
+                    size="lg"
+                    className="group relative overflow-hidden bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 px-8 py-4 text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-2xl"
+                    aria-label="Start your project with Isoftcube Technologies"
+                  >
+                    <span className="relative z-10 flex items-center">
+                      Start Your Project
+                      <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                    </span>
+                  </Button>
+                </Link>
+
+                <Link href="/about">
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="group border-2 border-white/30 text-white hover:bg-white hover:text-slate-900 px-8 py-4 text-lg font-semibold backdrop-blur-sm transition-all duration-300 transform hover:scale-105 bg-transparent"
+                    aria-label="Learn more about Isoftcube Technologies"
+                  >
+                    <Play className="mr-2 h-5 w-5" />
+                    <span className="inline md:hidden">About Us</span>
+                    <span className="hidden md:inline">Learn more about Isoftcube Technologies</span>
+                  </Button>
+                </Link>
+              </div> */}
+            </div>
+          </div>
+        </section> 
 
         <div className="container mx-auto px-6 py-16">
           <div className="grid lg:grid-cols-3 gap-12">
@@ -376,7 +433,7 @@ export default function ContactPage() {
                 </CardContent>
               </Card>
 
-              <Card className="border-0 shadow-xl bg-gradient-to-br from-blue-600 to-cyan-600 text-white">
+              {/* <Card className="border-0 shadow-xl bg-gradient-to-br from-blue-600 to-cyan-600 text-white">
                 <CardHeader>
                   <CardTitle className="text-white">Need Immediate Help?</CardTitle>
                   <CardDescription className="text-blue-100">For urgent technical support or emergencies</CardDescription>
@@ -385,7 +442,7 @@ export default function ContactPage() {
                   <Button className="w-full bg-white text-blue-600 hover:bg-gray-100">Call Emergency Support</Button>
                   <p className="text-sm text-blue-100 mt-4 text-center">Available 24/7 for existing clients</p>
                 </CardContent>
-              </Card>
+              </Card> */}
             </div>
           </div>
         </div>

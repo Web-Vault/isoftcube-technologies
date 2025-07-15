@@ -4,6 +4,8 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { FaThLarge, FaList, FaArrowRight } from "react-icons/fa";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import Head from 'next/head';
 
 export default function BlogsPage() {
@@ -86,17 +88,37 @@ export default function BlogsPage() {
       />
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-purple-50 pb-20">
         {/* Hero Section */}
-        <section className="relative bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 text-white space-y-8 flex items-center justify-center mb-16">
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-800/40 via-purple-800/30 to-indigo-800/20 pointer-events-none" />
-          <div className="container mx-auto px-6 text-center relative py-36 z-10 flex flex-col items-center justify-center">
-            <h1 className="text-5xl md:text-6xl font-black mb-6 leading-tight">
-              Explore Our <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">Blog</span>
-            </h1>
-            <p className="text-2xl md:text-3xl text-blue-100 leading-relaxed max-w-2xl mx-auto">
-              Insights, stories, and tips from our team on technology, business, and innovation.
-            </p>
+        <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900">
+
+<div className="absolute inset-0 opacity-5">
+            <div
+              className="absolute inset-0"
+              style={{
+                backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px)`,
+                backgroundSize: "100px 100px",
+              }}
+            ></div>
           </div>
-        </section>
+
+          <div className="relative z-10 mx-auto max-w-7xl px-6 text-center">
+            <div className="mt-14">
+
+              <div className="space-y-6">
+                <Badge className="px-6 py-3 bg-white/10 text-white border-white/20 text-base backdrop-blur-sm font-medium">
+                  🚀 Innovation Starts Here
+                </Badge>
+                <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight text-white leading-none">
+                Explore Our <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">Blog</span>
+                </h1>
+                <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed font-light">
+                Insights, stories, and tips from our team on technology, business, and innovation.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section> 
+
+
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row gap-10">
             {/* Sidebar */}

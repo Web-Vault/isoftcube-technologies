@@ -153,7 +153,7 @@ export default function Navbar() {
             </DropdownMenuContent>
           </DropdownMenu>
 
-          {[{ label: "About", href: "/about" }, { label: "Contact", href: "/contact" }, { label: "Careers", href: "/careers" }, { label: "Blogs", href: "/blogs" }].map((item) => (
+          {[{ label: "About", href: "/about" }, { label: "Careers", href: "/careers" }, { label: "Blogs", href: "/blogs" }, { label: "Contact", href: "/contact" }].map((item) => (
             <Link
               key={item.label}
               href={item.href}
@@ -161,7 +161,7 @@ export default function Navbar() {
                 (item.label === "Blogs" && isBlogsActive) || (pathname === item.href && item.label !== "Blogs")
                   ? "bg-white text-blue-600 font-bold shadow-sm z-10"
                   : isScrolled ? "text-gray-700" : "text-white"
-              } ${(item.label === "Blogs" && isBlogsActive) || (pathname === item.href && item.label !== "Blogs") ? "z-10" : "bg-transparent"}`}
+              } ${(item.label === "Blogs" && isBlogsActive) || (pathname === item.href && item.label !== "Blogs") ? "z-10" : "bg-transparent"} `}
               aria-label={item.label}
             >
               <span className="relative flex flex-col items-center">

@@ -167,7 +167,7 @@ export default function Footer() {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-400 text-sm">© 2025 {siteConfig?.siteName || 'Company'}. All rights reserved.</p>
             <div className="flex space-x-6 mt-4 md:mt-0">
-              <Link href="#" className="text-gray-400 hover:text-white text-sm transition-colors" aria-label="Other Link">
+              {/* <Link href="#" className="text-gray-400 hover:text-white text-sm transition-colors" aria-label="Other Link">
                 Privacy Policy
               </Link>
               <Link href="#" className="text-gray-400 hover:text-white text-sm transition-colors" aria-label="Other Link">
@@ -175,7 +175,7 @@ export default function Footer() {
               </Link>
               <Link href="#" className="text-gray-400 hover:text-white text-sm transition-colors" aria-label="Other Link">
                 Cookie Policy
-              </Link>
+              </Link> */}
             </div>
           </div>
         </div>
