@@ -223,7 +223,7 @@ export default function ContactPage() {
       />
       <main className="min-h-screen bg-gradient-to-br from-slate-50 to-purple-50">
         {/* Hero Section */}
-        <section className="bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 text-white py-30 md:py-36">
+        <section className="bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 text-white py-36">
           <div className="container mx-auto px-6">
             <div className="max-w-3xl mx-auto text-center">
               <h1 className="text-5xl md:text-6xl font-black mb-10 leading-tight">

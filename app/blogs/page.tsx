@@ -86,9 +86,9 @@ export default function BlogsPage() {
       />
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-purple-50 pb-20">
         {/* Hero Section */}
-        <section className="relative bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 text-white min-h-[400px] md:min-h-[500px] flex items-center justify-center mb-16">
+        <section className="relative bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 text-white space-y-8 flex items-center justify-center mb-16">
           <div className="absolute inset-0 bg-gradient-to-br from-blue-800/40 via-purple-800/30 to-indigo-800/20 pointer-events-none" />
-          <div className="container mx-auto px-6 text-center relative z-10 flex flex-col items-center justify-center">
+          <div className="container mx-auto px-6 text-center relative py-36 z-10 flex flex-col items-center justify-center">
             <h1 className="text-5xl md:text-6xl font-black mb-6 leading-tight">
               Explore Our <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">Blog</span>
             </h1>

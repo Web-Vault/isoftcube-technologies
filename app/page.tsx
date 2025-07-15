@@ -248,7 +248,11 @@ export default function HomePage() {
               "founders": [
                 { "@type": "Person", "name": "Bhavesh Kumbhani" },
               ],
-              "numberOfEmployees": 2-10,
+              "numberOfEmployees": {
+                "@type": "QuantitativeValue",
+                "minValue": 2,
+                "maxValue": 10
+              },
               "address": {
                 "@type": "PostalAddress",
                 "streetAddress": "717, Shivalik Satyamev, Nr. Vakil Saheb Bridge, S.P. Ring Road, South Bopal, Bopal",
@@ -307,7 +311,7 @@ export default function HomePage() {
           </div>
 
           <div className="relative z-10 mx-auto max-w-7xl px-6 text-center">
-            <div className="space-y-8">
+            <div className="mt-14">
               {/* Main Heading */}
               <div className="space-y-6">
                 <Badge className="px-6 py-3 bg-white/10 text-white border-white/20 text-base backdrop-blur-sm font-medium">
@@ -315,7 +319,7 @@ export default function HomePage() {
                 </Badge>
                 <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight text-white leading-none">
                   <span className="block">We Build</span>
-                  <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent text-wrap">
                     Digital Excellence
                   </span>
                 </h1>
@@ -347,7 +351,8 @@ export default function HomePage() {
                     aria-label="Learn more about Isoftcube Technologies"
                   >
                     <Play className="mr-2 h-5 w-5" />
-                    Learn more about Isoftcube Technologies
+                    <span className="inline md:hidden">About Us</span>
+                    <span className="hidden md:inline">Learn more about Isoftcube Technologies</span>
                   </Button>
                 </Link>
               </div>
