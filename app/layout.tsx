@@ -30,6 +30,7 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/favicon-96x96-1.png" />
         <meta name="google-site-verification" content="RVb0tdqlJUDgf_poJPCVS6pWfJ36LW7ZlyyImYcXs9A" />
+        <meta name="google-site-verification" content="fnjiyn9DD--604iA2NqmnX1a9bjGa8UwGNJfAymv07U" />
       </head>
       <Script
         src="https://www.googletagmanager.com/gtag/js?id=G-F19NB1LCJN"
